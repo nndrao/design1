@@ -8,27 +8,9 @@ import { HlmButtonDirective } from '../../shared/ui/hlm-button.directive';
   imports: [HlmButtonDirective],
   template: `
     <header class="flex items-center justify-between border-b border-border bg-card px-4 h-11 shrink-0">
-      <!-- Left: Logo + Title -->
-      <div class="flex items-center gap-4">
-        <div class="flex items-center gap-1.5 font-semibold text-foreground">
-          <!-- MarketsUI logo SVG -->
-          <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="32" height="32" rx="8" fill="#60A5FA"/>
-            <polyline
-              points="4,22 9,16 13,18.5 19,8 25,12"
-              stroke="white"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <circle cx="25" cy="12" r="3" fill="white"/>
-          </svg>
-          <span class="text-sm tracking-tight">MarketsUI</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-xs text-muted-foreground">Fixed Income</span>
-          <span class="text-[10px] text-muted-foreground bg-secondary px-1.5 py-0.5 rounded font-medium">Trading Terminal</span>
-        </div>
+      <!-- Left: Logo -->
+      <div class="flex items-center gap-3">
+        <span class="text-sm font-semibold text-foreground tracking-tight">MarketsUI</span>
       </div>
 
       <!-- Right: Search + Icons + Theme toggle -->

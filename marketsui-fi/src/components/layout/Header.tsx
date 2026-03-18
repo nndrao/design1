@@ -24,17 +24,7 @@ export function Header() {
   return (
     <header className="flex items-center justify-between border-b border-border bg-card px-5 h-12 shrink-0">
       <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2 font-semibold text-foreground">
-          <MarketsUIIcon />
-          <div className="flex flex-col">
-            <span className="text-sm tracking-tight leading-none">MarketsUI</span>
-            <span className="text-[9px] text-primary font-medium tracking-wider uppercase leading-none mt-0.5">
-              Fixed Income
-            </span>
-          </div>
-        </div>
-        <div className="h-5 w-px bg-border mx-1" />
-        <span className="text-[11px] text-muted-foreground">Trading Terminal</span>
+        <span className="text-sm font-semibold text-foreground tracking-tight">MarketsUI</span>
       </div>
 
       <div className="flex items-center gap-2">
