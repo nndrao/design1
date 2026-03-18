@@ -67,12 +67,13 @@ function augmentSOFR(s: SOFRFuture): SOFRFutureRow {
 const tFutureCols: ColDef<TreasuryFutureRow>[] = [
   { field: 'symbol', headerName: 'Symbol', width: 64, cellClass: 'text-primary' },
   { field: 'description', headerName: 'Desc', flex: 1 },
-  { field: 'bid', headerName: 'Bid', width: 72, cellClass: 'text-buy', valueFormatter: (p: any) => p.value != null ? fmtPrice(p.value) : '' },
-  { field: 'ask', headerName: 'Ask', width: 72, cellClass: 'text-sell', valueFormatter: (p: any) => p.value != null ? fmtPrice(p.value) : '' },
-  { field: 'lastPrice', headerName: 'Last', width: 72, cellClass: 'font-semibold', valueFormatter: (p: any) => p.value != null ? fmtPrice(p.value) : '' },
+  { field: 'bid', headerName: 'Bid', width: 72, type: 'rightAligned', cellClass: 'text-buy', valueFormatter: (p: any) => p.value != null ? fmtPrice(p.value) : '' },
+  { field: 'ask', headerName: 'Ask', width: 72, type: 'rightAligned', cellClass: 'text-sell', valueFormatter: (p: any) => p.value != null ? fmtPrice(p.value) : '' },
+  { field: 'lastPrice', headerName: 'Last', width: 72, type: 'rightAligned', cellClass: 'font-semibold', valueFormatter: (p: any) => p.value != null ? fmtPrice(p.value) : '' },
   {
     headerName: '32nds',
     width: 72,
+    type: 'rightAligned',
     valueGetter: (params: any) => params.data?.lastPrice,
     valueFormatter: (p: any) => p.value != null ? priceTo32nds(p.value) : '',
     cellClass: 'font-mono text-[10px]',
@@ -81,29 +82,31 @@ const tFutureCols: ColDef<TreasuryFutureRow>[] = [
     field: 'change',
     headerName: 'Chg',
     width: 68,
+    type: 'rightAligned',
     valueFormatter: (p: any) => p.value != null ? (p.value >= 0 ? '+' : '') + p.value.toFixed(4) : '',
     cellStyle: (params: any) => {
       if (params.value == null) return null;
       return { color: params.value >= 0 ? 'var(--buy)' : 'var(--sell)' };
     },
   },
-  { field: 'settle', headerName: 'Settle', width: 72, valueFormatter: (p: any) => p.value != null ? fmtPrice(p.value) : '' },
-  { field: 'high', headerName: 'High', width: 68, valueFormatter: (p: any) => p.value != null ? fmtPrice(p.value) : '' },
-  { field: 'low', headerName: 'Low', width: 68, valueFormatter: (p: any) => p.value != null ? fmtPrice(p.value) : '' },
-  { field: 'dv01PerContract', headerName: 'DV01/ct', width: 72, valueFormatter: (p: any) => p.value != null ? '$' + p.value.toFixed(1) : '' },
-  { field: 'openInterest', headerName: 'Open Int', width: 78, valueFormatter: (p: any) => p.value != null ? fmtK(p.value) : '' },
-  { field: 'volume', headerName: 'Volume', width: 72, valueFormatter: (p: any) => p.value != null ? fmtK(p.value) : '' },
+  { field: 'settle', headerName: 'Settle', width: 72, type: 'rightAligned', valueFormatter: (p: any) => p.value != null ? fmtPrice(p.value) : '' },
+  { field: 'high', headerName: 'High', width: 68, type: 'rightAligned', valueFormatter: (p: any) => p.value != null ? fmtPrice(p.value) : '' },
+  { field: 'low', headerName: 'Low', width: 68, type: 'rightAligned', valueFormatter: (p: any) => p.value != null ? fmtPrice(p.value) : '' },
+  { field: 'dv01PerContract', headerName: 'DV01/ct', width: 72, type: 'rightAligned', valueFormatter: (p: any) => p.value != null ? '$' + p.value.toFixed(1) : '' },
+  { field: 'openInterest', headerName: 'Open Int', width: 78, type: 'rightAligned', valueFormatter: (p: any) => p.value != null ? fmtK(p.value) : '' },
+  { field: 'volume', headerName: 'Volume', width: 72, type: 'rightAligned', valueFormatter: (p: any) => p.value != null ? fmtK(p.value) : '' },
 ];
 
 /* ── SOFR Futures column defs ───────────────────────────── */
 const sofrCols: ColDef<SOFRFutureRow>[] = [
   { field: 'contract', headerName: 'Contract', flex: 1 },
   { field: 'symbol', headerName: 'Symbol', width: 80 },
-  { field: 'price', headerName: 'Price', width: 90, valueFormatter: (p: any) => p.value?.toFixed(3) ?? '' },
+  { field: 'price', headerName: 'Price', width: 90, type: 'rightAligned', valueFormatter: (p: any) => p.value?.toFixed(3) ?? '' },
   {
     field: 'change',
     headerName: 'Chg',
     width: 72,
+    type: 'rightAligned',
     valueFormatter: (p: any) => p.value != null ? (p.value >= 0 ? '+' : '') + p.value.toFixed(3) : '',
     cellStyle: (params: any) => {
       if (params.value == null) return null;
@@ -114,14 +117,15 @@ const sofrCols: ColDef<SOFRFutureRow>[] = [
     field: 'impliedRate',
     headerName: 'Impl Rate',
     width: 90,
+    type: 'rightAligned',
     valueFormatter: (p: any) => p.value != null ? p.value.toFixed(3) + '%' : '',
     cellStyle: (params: any) => {
       if (params.value == null) return null;
       return params.value >= 4 ? { color: 'var(--sell)' } : null;
     },
   },
-  { field: 'volume', headerName: 'Volume', width: 80, valueFormatter: (p: any) => p.value != null ? fmtK(p.value) : '' },
-  { field: 'openInterest', headerName: 'Open Int', width: 90, valueFormatter: (p: any) => p.value != null ? fmtK(p.value) : '' },
+  { field: 'volume', headerName: 'Volume', width: 80, type: 'rightAligned', valueFormatter: (p: any) => p.value != null ? fmtK(p.value) : '' },
+  { field: 'openInterest', headerName: 'Open Int', width: 90, type: 'rightAligned', valueFormatter: (p: any) => p.value != null ? fmtK(p.value) : '' },
 ];
 
 @Component({

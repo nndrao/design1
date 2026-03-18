@@ -295,6 +295,7 @@ export function BlotterPanel() {
         headerName: 'Size $MM',
         field: 'sizeMM',
         width: 80,
+        type: 'rightAligned',
         cellClass: 'font-mono',
         valueFormatter: (p) => p.value != null ? `$${p.value}` : '',
       },
@@ -302,6 +303,7 @@ export function BlotterPanel() {
         headerName: 'Lmt Yield',
         field: 'lmtYield',
         width: 80,
+        type: 'rightAligned',
         cellClass: 'font-mono',
         valueFormatter: (p) => p.value ? (p.value as number).toFixed(3) + '%' : '',
       },
@@ -309,6 +311,7 @@ export function BlotterPanel() {
         headerName: 'Lmt Price',
         field: 'lmtPrice',
         width: 78,
+        type: 'rightAligned',
         cellClass: 'font-mono',
         valueFormatter: (p) => p.value ? (p.value as number).toFixed(3) : '',
       },
@@ -316,6 +319,7 @@ export function BlotterPanel() {
         headerName: 'Filled',
         field: 'filled',
         width: 66,
+        type: 'rightAligned',
         cellClass: 'font-mono',
         valueFormatter: (p) => {
           const d = p.data
@@ -327,12 +331,14 @@ export function BlotterPanel() {
         headerName: 'Fill %',
         colId: 'fillPct',
         width: 100,
+        type: 'rightAligned',
         cellRenderer: BlotterFillBarRenderer,
       },
       {
         headerName: 'Avg Yield',
         field: 'avgYield',
         width: 82,
+        type: 'rightAligned',
         cellClass: 'font-mono',
         valueFormatter: (p) => {
           const v = p.value as number

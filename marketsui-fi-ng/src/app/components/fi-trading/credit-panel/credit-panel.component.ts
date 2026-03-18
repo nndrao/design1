@@ -53,26 +53,27 @@ const corpBondCols: ColDef<CorpBond>[] = [
     },
   },
   { field: 'sector', headerName: 'Sector', width: 88 },
-  { field: 'coupon', headerName: 'Cpn', width: 68, valueFormatter: (p: any) => p.value?.toFixed(3) ?? '' },
+  { field: 'coupon', headerName: 'Cpn', width: 68, type: 'rightAligned', valueFormatter: (p: any) => p.value?.toFixed(3) ?? '' },
   { field: 'maturity', headerName: 'Maturity', width: 88 },
-  { field: 'bidYield', headerName: 'Bid Yld', width: 78, cellClass: 'text-buy', valueFormatter: (p: any) => p.value != null ? fmtYield(p.value) : '' },
-  { field: 'askYield', headerName: 'Ask Yld', width: 78, cellClass: 'text-sell', valueFormatter: (p: any) => p.value != null ? fmtYield(p.value) : '' },
-  { field: 'bidPrice', headerName: 'Bid Px', width: 72, cellClass: 'text-buy', valueFormatter: (p: any) => p.value != null ? fmtPrice(p.value) : '' },
-  { field: 'askPrice', headerName: 'Ask Px', width: 72, cellClass: 'text-sell', valueFormatter: (p: any) => p.value != null ? fmtPrice(p.value) : '' },
-  { field: 'zSpread', headerName: 'Z-Spd', width: 72, cellClass: 'text-primary', valueFormatter: (p: any) => p.value?.toFixed(0) ?? '' },
-  { field: 'oas', headerName: 'OAS', width: 72, valueFormatter: (p: any) => p.value?.toFixed(0) ?? '' },
+  { field: 'bidYield', headerName: 'Bid Yld', width: 78, type: 'rightAligned', cellClass: 'text-buy', valueFormatter: (p: any) => p.value != null ? fmtYield(p.value) : '' },
+  { field: 'askYield', headerName: 'Ask Yld', width: 78, type: 'rightAligned', cellClass: 'text-sell', valueFormatter: (p: any) => p.value != null ? fmtYield(p.value) : '' },
+  { field: 'bidPrice', headerName: 'Bid Px', width: 72, type: 'rightAligned', cellClass: 'text-buy', valueFormatter: (p: any) => p.value != null ? fmtPrice(p.value) : '' },
+  { field: 'askPrice', headerName: 'Ask Px', width: 72, type: 'rightAligned', cellClass: 'text-sell', valueFormatter: (p: any) => p.value != null ? fmtPrice(p.value) : '' },
+  { field: 'zSpread', headerName: 'Z-Spd', width: 72, type: 'rightAligned', cellClass: 'text-primary', valueFormatter: (p: any) => p.value?.toFixed(0) ?? '' },
+  { field: 'oas', headerName: 'OAS', width: 72, type: 'rightAligned', valueFormatter: (p: any) => p.value?.toFixed(0) ?? '' },
   {
     field: 'changeBps',
     headerName: 'Chg bps',
     width: 76,
+    type: 'rightAligned',
     valueFormatter: (p: any) => p.value != null ? fmtChgBps(p.value) : '',
     cellStyle: (params: any) => {
       if (params.value == null) return null;
       return { color: params.value >= 0 ? 'var(--sell)' : 'var(--buy)' };
     },
   },
-  { field: 'duration', headerName: 'Dur', width: 62, valueFormatter: (p: any) => p.value?.toFixed(1) ?? '' },
-  { field: 'dv01PerMM', headerName: 'DV01/MM', width: 80, valueFormatter: (p: any) => p.value != null ? '$' + Math.round(p.value).toLocaleString() : '' },
+  { field: 'duration', headerName: 'Dur', width: 62, type: 'rightAligned', valueFormatter: (p: any) => p.value?.toFixed(1) ?? '' },
+  { field: 'dv01PerMM', headerName: 'DV01/MM', width: 80, type: 'rightAligned', valueFormatter: (p: any) => p.value != null ? '$' + Math.round(p.value).toLocaleString() : '' },
 ];
 
 const corpBondRowClassRules: RowClassRules<CorpBond> = {
@@ -83,20 +84,21 @@ const cdxCols: ColDef<CDXIndex>[] = [
   { field: 'name', headerName: 'Index', width: 120 },
   { field: 'series', headerName: 'Ser', width: 56 },
   { field: 'tenor', headerName: 'Tenor', width: 60 },
-  { field: 'bidSpread', headerName: 'Bid', width: 68, cellClass: 'text-buy', valueFormatter: (p: any) => p.value?.toFixed(1) ?? '' },
-  { field: 'askSpread', headerName: 'Ask', width: 68, cellClass: 'text-sell', valueFormatter: (p: any) => p.value?.toFixed(1) ?? '' },
-  { field: 'midSpread', headerName: 'Mid', width: 68, valueFormatter: (p: any) => p.value?.toFixed(1) ?? '' },
+  { field: 'bidSpread', headerName: 'Bid', width: 68, type: 'rightAligned', cellClass: 'text-buy', valueFormatter: (p: any) => p.value?.toFixed(1) ?? '' },
+  { field: 'askSpread', headerName: 'Ask', width: 68, type: 'rightAligned', cellClass: 'text-sell', valueFormatter: (p: any) => p.value?.toFixed(1) ?? '' },
+  { field: 'midSpread', headerName: 'Mid', width: 68, type: 'rightAligned', valueFormatter: (p: any) => p.value?.toFixed(1) ?? '' },
   {
     field: 'changeBps',
     headerName: 'Chg',
     width: 60,
+    type: 'rightAligned',
     valueFormatter: (p: any) => p.value != null ? fmtChgBps(p.value) : '',
     cellStyle: (params: any) => {
       if (params.value == null) return null;
       return { color: params.value >= 0 ? 'var(--sell)' : 'var(--buy)' };
     },
   },
-  { field: 'spreadDuration', headerName: 'Spd Dur', width: 74, valueFormatter: (p: any) => p.value?.toFixed(2) ?? '' },
+  { field: 'spreadDuration', headerName: 'Spd Dur', width: 74, type: 'rightAligned', valueFormatter: (p: any) => p.value?.toFixed(2) ?? '' },
 ];
 
 const cdsCols: ColDef<CDS>[] = [
@@ -119,13 +121,14 @@ const cdsCols: ColDef<CDS>[] = [
     },
   },
   { field: 'sector', headerName: 'Sector', width: 88 },
-  { field: 'bidSpread', headerName: 'Bid', width: 72, cellClass: 'text-buy', valueFormatter: (p: any) => p.value?.toFixed(1) ?? '' },
-  { field: 'askSpread', headerName: 'Ask', width: 72, cellClass: 'text-sell', valueFormatter: (p: any) => p.value?.toFixed(1) ?? '' },
-  { field: 'midSpread', headerName: 'Mid', width: 72, valueFormatter: (p: any) => p.value?.toFixed(1) ?? '' },
+  { field: 'bidSpread', headerName: 'Bid', width: 72, type: 'rightAligned', cellClass: 'text-buy', valueFormatter: (p: any) => p.value?.toFixed(1) ?? '' },
+  { field: 'askSpread', headerName: 'Ask', width: 72, type: 'rightAligned', cellClass: 'text-sell', valueFormatter: (p: any) => p.value?.toFixed(1) ?? '' },
+  { field: 'midSpread', headerName: 'Mid', width: 72, type: 'rightAligned', valueFormatter: (p: any) => p.value?.toFixed(1) ?? '' },
   {
     field: 'changeBps',
     headerName: 'Chg bps',
     width: 72,
+    type: 'rightAligned',
     valueFormatter: (p: any) => p.value != null ? fmtChgBps(p.value) : '',
     cellStyle: (params: any) => {
       if (params.value == null) return null;

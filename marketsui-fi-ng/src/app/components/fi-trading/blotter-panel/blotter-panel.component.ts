@@ -247,26 +247,30 @@ export class BlotterPanelComponent {
     },
     {
       field: 'sizeMM', headerName: 'Size $MM', width: 80,
+      type: 'rightAligned',
       cellClass: 'font-mono',
       valueFormatter: (p: any) => p.value != null ? `$${p.value}` : '',
     },
     {
       field: 'lmtYield', headerName: 'Lmt Yield', width: 80,
+      type: 'rightAligned',
       cellClass: 'font-mono',
       valueFormatter: (p: any) => p.value ? p.value.toFixed(3) + '%' : '',
     },
     {
       field: 'lmtPrice', headerName: 'Lmt Price', width: 78,
+      type: 'rightAligned',
       cellClass: 'font-mono',
       valueFormatter: (p: any) => p.value ? p.value.toFixed(3) : '',
     },
     {
       field: 'filled', headerName: 'Filled', width: 66,
+      type: 'rightAligned',
       cellClass: 'font-mono',
       valueFormatter: (p: any) => `${p.value ?? 0}/${p.data?.sizeMM ?? 0}`,
     },
     {
-      colId: 'fillPct', headerName: 'Fill %', width: 100,
+      colId: 'fillPct', headerName: 'Fill %', width: 100, type: 'rightAligned',
       cellRenderer: (p: any) => {
         const total = p.data?.sizeMM ?? 0;
         const filled = p.data?.filled ?? 0;
@@ -283,6 +287,7 @@ export class BlotterPanelComponent {
     },
     {
       field: 'avgYield', headerName: 'Avg Yield', width: 82,
+      type: 'rightAligned',
       cellClass: 'font-mono',
       valueFormatter: (p: any) => p.value ? p.value.toFixed(3) + '%' : '\u2014',
     },

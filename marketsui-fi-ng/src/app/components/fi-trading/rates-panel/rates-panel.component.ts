@@ -175,6 +175,7 @@ export class RatesPanelComponent {
       headerName: 'Cpn',
       field: 'coupon',
       width: 72,
+      type: 'rightAligned',
       valueFormatter: (p: ValueFormatterParams<Treasury>) =>
         p.value != null ? p.value.toFixed(3) : '',
     },
@@ -187,6 +188,7 @@ export class RatesPanelComponent {
       headerName: 'Bid Yld',
       field: 'bidYield',
       width: 80,
+      type: 'rightAligned',
       cellClass: 'text-buy',
       valueFormatter: (p: ValueFormatterParams<Treasury>) =>
         p.value != null ? fmtYield(p.value) : '',
@@ -195,6 +197,7 @@ export class RatesPanelComponent {
       headerName: 'Ask Yld',
       field: 'askYield',
       width: 78,
+      type: 'rightAligned',
       cellClass: 'text-sell',
       valueFormatter: (p: ValueFormatterParams<Treasury>) =>
         p.value != null ? fmtYield(p.value) : '',
@@ -203,6 +206,7 @@ export class RatesPanelComponent {
       headerName: 'Bid Px',
       field: 'bidPrice',
       width: 76,
+      type: 'rightAligned',
       valueFormatter: (p: ValueFormatterParams<Treasury>) =>
         p.value != null ? fmtPrice(p.value) : '',
     },
@@ -210,6 +214,7 @@ export class RatesPanelComponent {
       headerName: 'Ask Px',
       field: 'askPrice',
       width: 76,
+      type: 'rightAligned',
       valueFormatter: (p: ValueFormatterParams<Treasury>) =>
         p.value != null ? fmtPrice(p.value) : '',
     },
@@ -217,6 +222,7 @@ export class RatesPanelComponent {
       headerName: 'Chg bps',
       field: 'changeBps',
       width: 82,
+      type: 'rightAligned',
       valueFormatter: (p: ValueFormatterParams<Treasury>) =>
         p.value != null ? (p.value >= 0 ? '+' : '') + p.value.toFixed(1) : '',
       cellClassRules: {
@@ -228,6 +234,7 @@ export class RatesPanelComponent {
       headerName: 'Mod Dur',
       field: 'modDuration',
       width: 76,
+      type: 'rightAligned',
       valueFormatter: (p: ValueFormatterParams<Treasury>) =>
         p.value != null ? p.value.toFixed(2) : '',
     },
@@ -235,6 +242,7 @@ export class RatesPanelComponent {
       headerName: 'DV01/MM',
       field: 'dv01PerMM',
       width: 84,
+      type: 'rightAligned',
       valueFormatter: (p: ValueFormatterParams<Treasury>) =>
         p.value != null ? '$' + Math.round(p.value).toLocaleString() : '',
     },

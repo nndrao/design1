@@ -96,7 +96,7 @@ function useTreasuryColDefs(): ColDef<TreasuryFutureRow>[] {
         field: 'bid',
         headerName: 'Bid',
         width: 72,
-        type: 'numericColumn',
+        type: 'rightAligned',
         valueFormatter: (p: { value: number }) => p.value?.toFixed(3) ?? '',
         cellClass: 'text-buy',
       },
@@ -104,7 +104,7 @@ function useTreasuryColDefs(): ColDef<TreasuryFutureRow>[] {
         field: 'ask',
         headerName: 'Ask',
         width: 72,
-        type: 'numericColumn',
+        type: 'rightAligned',
         valueFormatter: (p: { value: number }) => p.value?.toFixed(3) ?? '',
         cellClass: 'text-sell',
       },
@@ -112,14 +112,14 @@ function useTreasuryColDefs(): ColDef<TreasuryFutureRow>[] {
         field: 'lastPrice',
         headerName: 'Last',
         width: 72,
-        type: 'numericColumn',
+        type: 'rightAligned',
         valueFormatter: (p: { value: number }) => p.value?.toFixed(3) ?? '',
         cellClass: 'font-semibold',
       },
       {
         headerName: '32nds',
         width: 72,
-        type: 'numericColumn',
+        type: 'rightAligned',
         valueGetter: (p: { data: TreasuryFutureRow | undefined }) =>
           p.data ? priceTo32nds(p.data.lastPrice) : '',
         cellRenderer: (p: { value: string }) => (
@@ -130,7 +130,7 @@ function useTreasuryColDefs(): ColDef<TreasuryFutureRow>[] {
         field: 'change',
         headerName: 'Chg',
         width: 68,
-        type: 'numericColumn',
+        type: 'rightAligned',
         valueFormatter: (p: { value: number }) =>
           p.value != null ? (p.value >= 0 ? '+' : '') + p.value.toFixed(3) : '',
         cellRenderer: (p: { value: number; valueFormatted: string }) => (
@@ -143,28 +143,28 @@ function useTreasuryColDefs(): ColDef<TreasuryFutureRow>[] {
         field: 'settle',
         headerName: 'Settle',
         width: 72,
-        type: 'numericColumn',
+        type: 'rightAligned',
         valueFormatter: (p: { value: number }) => p.value?.toFixed(3) ?? '',
       },
       {
         field: 'high',
         headerName: 'High',
         width: 68,
-        type: 'numericColumn',
+        type: 'rightAligned',
         valueFormatter: (p: { value: number }) => p.value?.toFixed(3) ?? '',
       },
       {
         field: 'low',
         headerName: 'Low',
         width: 68,
-        type: 'numericColumn',
+        type: 'rightAligned',
         valueFormatter: (p: { value: number }) => p.value?.toFixed(3) ?? '',
       },
       {
         field: 'dv01PerContract',
         headerName: 'DV01/ct',
         width: 72,
-        type: 'numericColumn',
+        type: 'rightAligned',
         valueFormatter: (p: { value: number }) =>
           p.value != null ? '$' + p.value.toFixed(2) : '',
       },
@@ -172,7 +172,7 @@ function useTreasuryColDefs(): ColDef<TreasuryFutureRow>[] {
         field: 'openInterest',
         headerName: 'Open Int',
         width: 78,
-        type: 'numericColumn',
+        type: 'rightAligned',
         valueFormatter: (p: { value: number }) =>
           p.value != null ? fmtK(p.value) : '',
       },
@@ -180,7 +180,7 @@ function useTreasuryColDefs(): ColDef<TreasuryFutureRow>[] {
         field: 'volume',
         headerName: 'Volume',
         width: 72,
-        type: 'numericColumn',
+        type: 'rightAligned',
         valueFormatter: (p: { value: number }) =>
           p.value != null ? fmtK(p.value) : '',
       },
@@ -202,7 +202,7 @@ function useSOFRColDefs(): ColDef<SOFRFutureRow>[] {
         field: 'price',
         headerName: 'Price',
         width: 90,
-        type: 'numericColumn',
+        type: 'rightAligned',
         valueFormatter: (p: { value: number }) => p.value?.toFixed(4) ?? '',
         cellClass: 'font-mono',
       },
@@ -210,7 +210,7 @@ function useSOFRColDefs(): ColDef<SOFRFutureRow>[] {
         field: 'change',
         headerName: 'Chg',
         width: 72,
-        type: 'numericColumn',
+        type: 'rightAligned',
         valueFormatter: (p: { value: number }) =>
           p.value != null ? (p.value >= 0 ? '+' : '') + p.value.toFixed(4) : '',
         cellRenderer: (p: { value: number; valueFormatted: string }) => (
@@ -223,7 +223,7 @@ function useSOFRColDefs(): ColDef<SOFRFutureRow>[] {
         field: 'impliedRate',
         headerName: 'Impl Rate',
         width: 90,
-        type: 'numericColumn',
+        type: 'rightAligned',
         cellRenderer: (p: { value: number }) => (
           <span className={p.value != null ? (p.value >= 4 ? 'text-sell' : 'text-buy') : ''}>
             {p.value != null ? p.value.toFixed(3) + '%' : ''}
@@ -234,7 +234,7 @@ function useSOFRColDefs(): ColDef<SOFRFutureRow>[] {
         field: 'volume',
         headerName: 'Volume',
         width: 80,
-        type: 'numericColumn',
+        type: 'rightAligned',
         valueFormatter: (p: { value: number }) =>
           p.value != null ? fmtK(p.value) : '',
       },
@@ -242,7 +242,7 @@ function useSOFRColDefs(): ColDef<SOFRFutureRow>[] {
         field: 'openInterest',
         headerName: 'Open Int',
         width: 90,
-        type: 'numericColumn',
+        type: 'rightAligned',
         valueFormatter: (p: { value: number }) =>
           p.value != null ? fmtK(p.value) : '',
       },
