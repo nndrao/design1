@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { MarketDataContext } from './MarketDataContext'
 import { useLiveMarketData, fmtYield, fmtChgBps } from './marketData'
 import { cn } from '@/lib/utils'
@@ -34,6 +34,44 @@ const TABS: FITab[] = [
   'Design System',
   'Components',
 ]
+
+/* ── Flash hook ───────────────────────────────────────────── */
+function useFlash(value: number | undefined) {
+  const prevRef = useRef(value)
+  const [flash, setFlash] = useState('')
+  useEffect(() => {
+    if (value != null && prevRef.current != null && prevRef.current !== value) {
+      setFlash(value > prevRef.current ? 'flash-positive' : 'flash-negative')
+      const timer = setTimeout(() => setFlash(''), 600)
+      prevRef.current = value
+      return () => clearTimeout(timer)
+    }
+    prevRef.current = value
+  }, [value])
+  return flash
+}
+
+/* ── Ticker item with flash ──────────────────────────────── */
+function TickerItem({ label, mid, chg, fmtMid, fmtChg }: {
+  label: string
+  mid: number | undefined
+  chg: number | undefined
+  fmtMid: string
+  fmtChg: string
+}) {
+  const flash = useFlash(mid)
+  return (
+    <div key={label} className="flex items-center gap-1">
+      <span className="text-muted-foreground">{label}</span>
+      <span className={cn('text-foreground', flash)}>{fmtMid}</span>
+      {chg != null && (
+        <span className={cn('text-[10px]', chg >= 0 ? 'text-sell' : 'text-buy')}>
+          {fmtChg}
+        </span>
+      )}
+    </div>
+  )
+}
 
 /* ── Market time hook ─────────────────────────────────────── */
 function useMarketTime() {
@@ -116,7 +154,7 @@ function MarketStatusBar() {
           <span
             className={cn(
               'inline-block w-1.5 h-1.5 rounded-full',
-              isOpen ? 'bg-buy animate-pulse' : 'bg-sell'
+              isOpen ? 'bg-buy pulse-dot' : 'bg-sell'
             )}
           />
           <span className="text-muted-foreground text-[10px] uppercase tracking-wider">
@@ -128,15 +166,14 @@ function MarketStatusBar() {
 
         {/* Treasury yields */}
         {benchmarks.map(({ label, ust }) => (
-          <div key={label} className="flex items-center gap-1">
-            <span className="text-muted-foreground">{label}</span>
-            <span className="text-foreground">{ust ? fmtYield(ust.mid) : '—'}</span>
-            {ust && (
-              <span className={cn('text-[10px]', ust.chg >= 0 ? 'text-sell' : 'text-buy')}>
-                {fmtChgBps(ust.chg)}
-              </span>
-            )}
-          </div>
+          <TickerItem
+            key={label}
+            label={label}
+            mid={ust?.mid}
+            chg={ust?.chg}
+            fmtMid={ust ? fmtYield(ust.mid) : '—'}
+            fmtChg={ust ? fmtChgBps(ust.chg) : ''}
+          />
         ))}
 
         <div className="h-3 w-px bg-border" />
@@ -151,26 +188,22 @@ function MarketStatusBar() {
 
         {/* CDX indices */}
         {cdxIG && (
-          <div className="flex items-center gap-1">
-            <span className="text-muted-foreground">CDX IG</span>
-            <span className="text-foreground">{cdxIG.mid.toFixed(1)}</span>
-            <span
-              className={cn('text-[10px]', cdxIG.chg >= 0 ? 'text-sell' : 'text-buy')}
-            >
-              {fmtChgBps(cdxIG.chg)}
-            </span>
-          </div>
+          <TickerItem
+            label="CDX IG"
+            mid={cdxIG.mid}
+            chg={cdxIG.chg}
+            fmtMid={cdxIG.mid.toFixed(1)}
+            fmtChg={fmtChgBps(cdxIG.chg)}
+          />
         )}
         {cdxHY && (
-          <div className="flex items-center gap-1">
-            <span className="text-muted-foreground">CDX HY</span>
-            <span className="text-foreground">{cdxHY.mid.toFixed(1)}</span>
-            <span
-              className={cn('text-[10px]', cdxHY.chg >= 0 ? 'text-sell' : 'text-buy')}
-            >
-              {fmtChgBps(cdxHY.chg)}
-            </span>
-          </div>
+          <TickerItem
+            label="CDX HY"
+            mid={cdxHY.mid}
+            chg={cdxHY.chg}
+            fmtMid={cdxHY.mid.toFixed(1)}
+            fmtChg={fmtChgBps(cdxHY.chg)}
+          />
         )}
       </div>
 

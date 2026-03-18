@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useRef, useState, useEffect } from 'react'
 import Highcharts from 'highcharts'
 import { HighchartsReact } from 'highcharts-react-official'
 import type { LayoutItem } from 'react-grid-layout'
@@ -6,6 +6,22 @@ import { useMarketData } from './MarketDataContext'
 import { PanelGrid, DragHandle } from './PanelGrid'
 import { DASHBOARD_ORDERS, DASHBOARD_POSITIONS } from './marketData'
 import { cn, fmtYield, fmtBps, fmtPnL, fmtDV01 } from '@/lib/utils'
+
+/* ── Flash hook for tick updates ──────────────────────────── */
+function useTickFlash(value: number | undefined) {
+  const prevRef = useRef(value)
+  const [flash, setFlash] = useState('')
+  useEffect(() => {
+    if (value != null && prevRef.current != null && prevRef.current !== value) {
+      setFlash(value > prevRef.current ? 'flash-positive tick-update' : 'flash-negative tick-update')
+      const timer = setTimeout(() => setFlash(''), 600)
+      prevRef.current = value
+      return () => clearTimeout(timer)
+    }
+    prevRef.current = value
+  }, [value])
+  return flash
+}
 
 /* ── KPI data ─────────────────────────────────────────────── */
 const KPI_DATA = [
@@ -85,6 +101,32 @@ function KpiCard({
   )
 }
 
+
+/* ── Benchmark row with flash ────────────────────────────── */
+function BenchmarkRow({ b }: { b: { name: string; value?: number; chg?: number; isYield: boolean } }) {
+  const flash = useTickFlash(b.value)
+  return (
+    <div className="flex items-center justify-between py-2 border-b border-border/50 last:border-b-0">
+      <span className="text-xs text-muted-foreground">{b.name}</span>
+      <div className="flex items-center gap-2">
+        <span className={cn('text-xs font-mono text-foreground', flash)}>
+          {b.value != null
+            ? b.isYield
+              ? fmtYield(b.value)
+              : b.name === '2s10s Slope'
+                ? b.value.toFixed(1) + ' bps'
+                : b.value.toFixed(1)
+            : '—'}
+        </span>
+        {b.chg != null && (
+          <span className={cn('text-[10px] font-mono', b.chg >= 0 ? 'text-sell' : 'text-buy')}>
+            {fmtBps(b.chg)}
+          </span>
+        )}
+      </div>
+    </div>
+  )
+}
 
 /* ── Status badge ─────────────────────────────────────────── */
 function StatusBadge({ status }: { status: string }) {
@@ -267,33 +309,7 @@ export function DashboardPanel() {
         <PanelCard title="Key Benchmarks">
           <div className="flex flex-col gap-1">
             {benchmarks.map((b) => (
-              <div
-                key={b.name}
-                className="flex items-center justify-between py-2 border-b border-border/50 last:border-b-0"
-              >
-                <span className="text-xs text-muted-foreground">{b.name}</span>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono text-foreground">
-                    {b.value != null
-                      ? b.isYield
-                        ? fmtYield(b.value)
-                        : b.name === '2s10s Slope'
-                          ? b.value.toFixed(1) + ' bps'
-                          : b.value.toFixed(1)
-                      : '—'}
-                  </span>
-                  {b.chg != null && (
-                    <span
-                      className={cn(
-                        'text-[10px] font-mono',
-                        b.chg >= 0 ? 'text-sell' : 'text-buy'
-                      )}
-                    >
-                      {fmtBps(b.chg)}
-                    </span>
-                  )}
-                </div>
-              </div>
+              <BenchmarkRow key={b.name} b={b} />
             ))}
           </div>
         </PanelCard>

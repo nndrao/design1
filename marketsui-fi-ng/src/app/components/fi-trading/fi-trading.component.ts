@@ -5,8 +5,10 @@ import {
   signal,
   computed,
   inject,
+  effect,
 } from '@angular/core';
 
+import { NgClass } from '@angular/common';
 import { MarketDataService } from '../../services/market-data.service';
 import { ThemeService } from '../../services/theme.service';
 import { fmtYield, fmtChgBps } from '../../shared/utils';
@@ -48,6 +50,7 @@ const TABS: FITab[] = [
   selector: 'app-fi-trading',
   standalone: true,
   imports: [
+    NgClass,
     HlmButtonDirective,
     DashboardPanelComponent,
     RatesPanelComponent,
@@ -70,7 +73,7 @@ const TABS: FITab[] = [
             <span
               class="inline-block w-1.5 h-1.5 rounded-full"
               [class.bg-buy]="isOpen()"
-              [class.animate-pulse]="isOpen()"
+              [class.pulse-dot]="isOpen()"
               [class.bg-sell]="!isOpen()"
             ></span>
             <span class="text-muted-foreground text-[10px] uppercase tracking-wider">
@@ -84,7 +87,7 @@ const TABS: FITab[] = [
           @for (b of benchmarks(); track b.label) {
             <div class="flex items-center gap-1">
               <span class="text-muted-foreground">{{ b.label }}</span>
-              <span class="text-foreground">{{ b.mid }}</span>
+              <span class="text-foreground" [ngClass]="flashMap()[b.label] || ''">{{ b.mid }}</span>
               @if (b.ust) {
                 <span
                   class="text-[10px]"
@@ -109,7 +112,7 @@ const TABS: FITab[] = [
           @if (cdxIG(); as ig) {
             <div class="flex items-center gap-1">
               <span class="text-muted-foreground">CDX IG</span>
-              <span class="text-foreground">{{ ig.mid.toFixed(1) }}</span>
+              <span class="text-foreground" [ngClass]="flashMap()['CDX IG'] || ''">{{ ig.mid.toFixed(1) }}</span>
               <span
                 class="text-[10px]"
                 [class.text-sell]="ig.chg >= 0"
@@ -122,7 +125,7 @@ const TABS: FITab[] = [
           @if (cdxHY(); as hy) {
             <div class="flex items-center gap-1">
               <span class="text-muted-foreground">CDX HY</span>
-              <span class="text-foreground">{{ hy.mid.toFixed(1) }}</span>
+              <span class="text-foreground" [ngClass]="flashMap()['CDX HY'] || ''">{{ hy.mid.toFixed(1) }}</span>
               <span
                 class="text-[10px]"
                 [class.text-sell]="hy.chg >= 0"
@@ -264,6 +267,45 @@ export class FiTradingComponent implements OnInit, OnDestroy {
       .cdxIndices()
       .find((c) => c.name.includes('HY'));
   });
+
+  /* ── Flash map for ticker value changes ──────────────────── */
+  readonly flashMap = signal<Record<string, string>>({});
+  private prevMids: Record<string, number> = {};
+  private flashTimers: Record<string, ReturnType<typeof setTimeout>> = {};
+
+  constructor() {
+    // Watch benchmarks for changes and set flash classes
+    effect(() => {
+      const bms = this.benchmarks();
+      const ig = this.cdxIG();
+      const hy = this.cdxHY();
+      const entries: { key: string; mid: number | undefined }[] = [
+        ...bms.map((b) => ({ key: b.label, mid: b.ust?.mid })),
+        { key: 'CDX IG', mid: ig?.mid },
+        { key: 'CDX HY', mid: hy?.mid },
+      ];
+      const newFlash: Record<string, string> = {};
+      for (const { key, mid } of entries) {
+        if (mid == null) continue;
+        const prev = this.prevMids[key];
+        if (prev != null && prev !== mid) {
+          newFlash[key] = mid > prev ? 'flash-positive' : 'flash-negative';
+          if (this.flashTimers[key]) clearTimeout(this.flashTimers[key]);
+          this.flashTimers[key] = setTimeout(() => {
+            this.flashMap.update((m) => {
+              const copy = { ...m };
+              delete copy[key];
+              return copy;
+            });
+          }, 600);
+        }
+        this.prevMids[key] = mid;
+      }
+      if (Object.keys(newFlash).length > 0) {
+        this.flashMap.update((m) => ({ ...m, ...newFlash }));
+      }
+    });
+  }
 
   /* ── Template helpers ─────────────────────────────────────── */
   formatChgBps = fmtChgBps;
