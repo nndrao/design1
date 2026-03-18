@@ -284,7 +284,7 @@ export class FiTradingComponent implements OnInit, OnDestroy {
         { key: 'CDX IG', mid: ig?.mid },
         { key: 'CDX HY', mid: hy?.mid },
       ];
-      const newFlash: Record<string, string> = { ...this.flashMap() };
+      const newFlash: Record<string, string> = {};
       for (const { key, mid } of entries) {
         if (mid == null) continue;
         const prev = this.prevMids[key];
@@ -301,7 +301,9 @@ export class FiTradingComponent implements OnInit, OnDestroy {
         }
         this.prevMids[key] = mid;
       }
-      this.flashMap.set(newFlash);
+      if (Object.keys(newFlash).length > 0) {
+        this.flashMap.update((m) => ({ ...m, ...newFlash }));
+      }
     });
   }
 

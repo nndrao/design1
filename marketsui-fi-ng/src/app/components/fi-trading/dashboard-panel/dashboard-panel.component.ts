@@ -200,7 +200,7 @@ export class DashboardPanelComponent {
   constructor() {
     effect(() => {
       const bms = this.mds.benchmarks();
-      const newFlash: Record<string, string> = { ...this.benchmarkFlash() };
+      const newFlash: Record<string, string> = {};
       for (const bm of bms) {
         const prev = this.prevBenchmarkMids[bm.label];
         if (prev != null && prev !== bm.value) {
@@ -218,7 +218,9 @@ export class DashboardPanelComponent {
         }
         this.prevBenchmarkMids[bm.label] = bm.value;
       }
-      this.benchmarkFlash.set(newFlash);
+      if (Object.keys(newFlash).length > 0) {
+        this.benchmarkFlash.update((m) => ({ ...m, ...newFlash }));
+      }
     });
   }
 
