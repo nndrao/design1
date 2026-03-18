@@ -95,9 +95,9 @@ const STRESS_SCENARIOS = [
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   template: `
-    <div class="h-full overflow-y-auto p-3 space-y-3">
+    <div class="h-full flex flex-col p-3 gap-2 overflow-hidden">
       <!-- KPI Row -->
-      <div class="grid grid-cols-4 gap-3">
+      <div class="grid grid-cols-4 gap-2 shrink-0">
         @for (kpi of kpis(); track kpi.label) {
           <div class="bg-card border border-border rounded-lg px-3 py-2 flex flex-col gap-0.5">
             <span class="text-[10px] text-muted-foreground uppercase tracking-wider">{{ kpi.label }}</span>
@@ -107,7 +107,7 @@ const STRESS_SCENARIOS = [
       </div>
 
       <!-- Middle row: DV01 chart | Sector donut | Credit metrics + VaR -->
-      <div class="grid grid-cols-12 gap-3" style="min-height:340px;">
+      <div class="grid grid-cols-12 gap-2 flex-1 min-h-0">
         <!-- DV01 by Tenor Bucket -->
         <div class="col-span-4 bg-card border border-border rounded-xl overflow-hidden flex flex-col">
           <div class="px-3 pt-2 pb-1">
@@ -147,7 +147,7 @@ const STRESS_SCENARIOS = [
         </div>
 
         <!-- Credit Risk Metrics + VaR -->
-        <div class="col-span-4 space-y-3">
+        <div class="col-span-4 flex flex-col gap-2 min-h-0">
           <!-- Credit Risk Metrics -->
           <div class="bg-card border border-border rounded-xl overflow-hidden flex flex-col">
             <div class="px-3 pt-2 pb-1">
@@ -236,8 +236,8 @@ const STRESS_SCENARIOS = [
       </div>
 
       <!-- Stress Scenarios -->
-      <div class="bg-card border border-border rounded-xl overflow-hidden p-3">
-        <div class="mb-1.5">
+      <div class="bg-card border border-border rounded-xl overflow-hidden p-2 shrink-0">
+        <div class="mb-1">
           <h3 class="text-xs font-semibold text-foreground">Stress Scenarios</h3>
         </div>
         <div class="grid grid-cols-9 gap-2">
