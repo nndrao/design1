@@ -65,30 +65,73 @@ function PanelCard({
   )
 }
 
+/* ── Generate sparkline data (random walk) ─────────────── */
+function generateSparkline(seed: number, positive: boolean): number[] {
+  const points: number[] = []
+  let v = seed % 50 + 20
+  for (let i = 0; i < 20; i++) {
+    v += (Math.sin(seed * 0.3 + i * 0.7) * 3) + (positive ? 0.5 : -0.5)
+    points.push(v)
+  }
+  return points
+}
+
+function SparklineSVG({ data, positive }: { data: number[]; positive: boolean }) {
+  const width = 100
+  const height = 24
+  const min = Math.min(...data)
+  const max = Math.max(...data)
+  const range = max - min || 1
+  const pts = data
+    .map((v, i) => `${(i / (data.length - 1)) * width},${height - ((v - min) / range) * height}`)
+    .join(' ')
+
+  return (
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="block">
+      <polyline
+        points={pts}
+        fill="none"
+        stroke={positive ? 'var(--buy)' : 'var(--sell)'}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+    </svg>
+  )
+}
+
 /* ── KPI Card ─────────────────────────────────────────────── */
 function KpiCard({
   label,
   value,
   subtitle,
   format,
+  index,
 }: {
   label: string
   value: number
   subtitle: string
   format: string
+  index: number
 }) {
   const isPnl = format === 'pnl'
   const isPositive = value >= 0
+  const [expanded, setExpanded] = useState(false)
+
+  const sparkData = useMemo(() => generateSparkline(index * 7 + 13, isPositive), [index, isPositive])
 
   return (
-    <div className="relative bg-card border border-border rounded-xl p-4 flex flex-col justify-between h-full overflow-hidden">
+    <div
+      className="relative bg-card border border-border rounded-xl p-4 flex flex-col justify-between h-full overflow-hidden cursor-pointer transition-all"
+      onClick={() => setExpanded((e) => !e)}
+    >
       <DragHandle />
       <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
         {label}
       </span>
       <span
         className={cn(
-          'text-xl font-mono font-semibold mt-1',
+          'text-xl font-mono font-semibold mt-1 animate-count-up',
           isPnl && isPositive && 'text-buy',
           isPnl && !isPositive && 'text-sell',
           !isPnl && 'text-foreground'
@@ -97,6 +140,14 @@ function KpiCard({
         {formatKpi(value, format)}
       </span>
       <span className="text-[10px] text-muted-foreground mt-0.5">{subtitle}</span>
+      <div
+        className="overflow-hidden transition-all duration-300 ease-out"
+        style={{ maxHeight: expanded ? 32 : 0, opacity: expanded ? 1 : 0 }}
+      >
+        <div className="pt-1.5">
+          <SparklineSVG data={sparkData} positive={isPositive} />
+        </div>
+      </div>
     </div>
   )
 }
@@ -262,7 +313,7 @@ export function DashboardPanel() {
           lineWidth: 2,
           fillColor: {
             linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-            stops: [[0, 'rgba(45,212,191,0.15)'], [1, 'rgba(45,212,191,0)']],
+            stops: [[0, 'oklch(0.55 0.2 260 / 30%)'], [1, 'oklch(0.55 0.2 260 / 0%)']],
           },
         },
         {
@@ -291,6 +342,7 @@ export function DashboardPanel() {
             value={kpi.value}
             subtitle={kpi.subtitle}
             format={kpi.format}
+            index={i}
           />
         </div>
       ))}

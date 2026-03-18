@@ -334,15 +334,15 @@ export class RatesPanelComponent {
       },
       series: [
         {
-          type: 'area' as const,
+          type: 'areaspline' as const,
           name: 'Today',
           data: todayValues,
           color: primaryColor,
           fillColor: {
             linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
             stops: [
-              [0, 'rgba(96, 165, 250, 0.30)'],
-              [1, 'rgba(96, 165, 250, 0.02)'],
+              [0, 'oklch(0.55 0.2 260 / 30%)'],
+              [1, 'oklch(0.55 0.2 260 / 0%)'],
             ] as Array<[number, string]>,
           },
           lineWidth: 2,

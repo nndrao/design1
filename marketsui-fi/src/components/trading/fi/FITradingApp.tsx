@@ -215,13 +215,98 @@ function MarketStatusBar() {
   )
 }
 
+/* ── Keyboard Shortcuts Data ──────────────────────────────── */
+const SHORTCUTS = [
+  { keys: '1–9', description: 'Switch tabs' },
+  { keys: 'N', description: 'New order' },
+  { keys: '?', description: 'Show shortcuts' },
+  { keys: 'Esc', description: 'Close dialogs' },
+]
+
+/* ── Shortcuts Overlay ───────────────────────────────────── */
+function ShortcutsOverlay({ onClose }: { onClose: () => void }) {
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center"
+      onClick={onClose}
+    >
+      <div className="absolute inset-0 bg-background/60 backdrop-blur-sm" />
+      <div
+        className="relative bg-card/95 backdrop-blur-md border border-border rounded-2xl shadow-2xl p-6 w-full max-w-sm"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="text-sm font-semibold text-foreground">Keyboard Shortcuts</h2>
+          <button
+            onClick={onClose}
+            className="text-muted-foreground hover:text-foreground transition-colors text-xs"
+          >
+            Esc
+          </button>
+        </div>
+        <div className="grid gap-2">
+          {SHORTCUTS.map((s) => (
+            <div key={s.keys} className="flex items-center justify-between py-1.5">
+              <span className="text-xs text-muted-foreground">{s.description}</span>
+              <kbd className="inline-flex items-center px-2 py-0.5 rounded-md bg-secondary border border-border text-[11px] font-mono font-medium text-foreground">
+                {s.keys}
+              </kbd>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 /* ── Main orchestrator ────────────────────────────────────── */
 export function FITradingApp() {
   const [activeTab, setActiveTab] = useState<FITab>('Overview')
+  const [showShortcuts, setShowShortcuts] = useState(false)
   const data = useLiveMarketData()
 
   const handleTabClick = useCallback((tab: FITab) => {
     setActiveTab(tab)
+  }, [])
+
+  /* Keyboard shortcuts */
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      const target = e.target as HTMLElement
+      const isInput = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.tagName === 'SELECT' || target.isContentEditable
+      if (isInput) return
+
+      // ? — toggle shortcuts overlay
+      if (e.key === '?' || (e.shiftKey && e.key === '/')) {
+        e.preventDefault()
+        setShowShortcuts((v) => !v)
+        return
+      }
+
+      // Esc — close overlay
+      if (e.key === 'Escape') {
+        setShowShortcuts(false)
+        return
+      }
+
+      // 1-9 — switch tabs
+      const num = parseInt(e.key, 10)
+      if (num >= 1 && num <= 9 && num <= TABS.length) {
+        e.preventDefault()
+        setActiveTab(TABS[num - 1])
+        return
+      }
+
+      // N — navigate to Order Blotter (where order ticket lives)
+      if (e.key === 'n' || e.key === 'N') {
+        e.preventDefault()
+        setActiveTab('Order Blotter')
+        return
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
   return (
@@ -232,7 +317,7 @@ export function FITradingApp() {
 
         {/* Tab Bar */}
         <div className="flex items-center border-b border-border bg-card px-4 shrink-0">
-          {TABS.map((tab) => (
+          {TABS.map((tab, i) => (
             <button
               key={tab}
               onClick={() => handleTabClick(tab)}
@@ -247,6 +332,7 @@ export function FITradingApp() {
               {activeTab === tab && (
                 <span className="absolute bottom-0 left-1 right-1 h-[2px] rounded-full bg-primary" />
               )}
+              <span className="ml-1 text-[9px] text-muted-foreground/50 font-mono">{i + 1}</span>
             </button>
           ))}
         </div>
@@ -255,6 +341,9 @@ export function FITradingApp() {
         <div className="flex-1 min-h-0 overflow-hidden">
           <TabContent tab={activeTab} />
         </div>
+
+        {/* Keyboard Shortcuts Overlay */}
+        {showShortcuts && <ShortcutsOverlay onClose={() => setShowShortcuts(false)} />}
       </div>
     </MarketDataContext.Provider>
   )
