@@ -39,6 +39,7 @@ const TABS: FITab[] = [
   selector: 'app-fi-trading',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'block h-full' },
   imports: [
     CommonModule,
     HeaderComponent,

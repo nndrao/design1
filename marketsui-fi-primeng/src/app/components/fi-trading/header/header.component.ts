@@ -9,6 +9,7 @@ import { fmtYield, fmtChgBps } from '../../../shared/utils';
   selector: 'app-header',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'block shrink-0' },
   imports: [CommonModule, ButtonModule, TooltipModule],
   template: `
     <!-- Header Bar -->
