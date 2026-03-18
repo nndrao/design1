@@ -10,7 +10,7 @@ import { HlmButtonDirective } from '../../shared/ui/hlm-button.directive';
     <header class="flex items-center justify-between border-b border-border bg-card px-4 h-11 shrink-0">
       <!-- Left: Logo -->
       <div class="flex items-center gap-3">
-        <span class="text-sm font-semibold text-foreground tracking-tight">MarketsUI</span>
+        <span class="text-sm font-semibold tracking-tight"><span class="text-foreground">Markets</span><span class="text-primary">UI</span></span>
       </div>
 
       <!-- Right: Search + Icons + Theme toggle -->

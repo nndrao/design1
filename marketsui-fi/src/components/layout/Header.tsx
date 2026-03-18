@@ -24,7 +24,7 @@ export function Header() {
   return (
     <header className="flex items-center justify-between border-b border-border bg-card px-5 h-12 shrink-0">
       <div className="flex items-center gap-3">
-        <span className="text-sm font-semibold text-foreground tracking-tight">MarketsUI</span>
+        <span className="text-sm font-semibold tracking-tight"><span className="text-foreground">Markets</span><span className="text-primary">UI</span></span>
       </div>
 
       <div className="flex items-center gap-2">
