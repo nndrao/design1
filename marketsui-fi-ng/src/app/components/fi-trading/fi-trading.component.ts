@@ -70,7 +70,7 @@ const TABS: FITab[] = [
             <span
               class="inline-block w-1.5 h-1.5 rounded-full"
               [class.bg-buy]="isOpen()"
-              [class.animate-pulse]="isOpen()"
+              [class.pulse-dot]="isOpen()"
               [class.bg-sell]="!isOpen()"
             ></span>
             <span class="text-muted-foreground text-[10px] uppercase tracking-wider">

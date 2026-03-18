@@ -116,7 +116,7 @@ function MarketStatusBar() {
           <span
             className={cn(
               'inline-block w-1.5 h-1.5 rounded-full',
-              isOpen ? 'bg-buy animate-pulse' : 'bg-sell'
+              isOpen ? 'bg-buy pulse-dot' : 'bg-sell'
             )}
           />
           <span className="text-muted-foreground text-[10px] uppercase tracking-wider">

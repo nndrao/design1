@@ -125,6 +125,44 @@
 * { scrollbar-width: thin; scrollbar-color: var(--muted-foreground) transparent; }
 .dark * { scrollbar-color: var(--border) transparent; }
 
+/* ─── Real-time animations ──────────────────────────────── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+@keyframes flash-positive {
+  0% { background-color: oklch(0.65 0.2 155 / 30%); }
+  100% { background-color: transparent; }
+}
+
+@keyframes flash-negative {
+  0% { background-color: oklch(0.60 0.22 25 / 30%); }
+  100% { background-color: transparent; }
+}
+
+@keyframes tick-update {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.flash-positive {
+  animation: flash-positive 0.6s ease-out;
+}
+
+.flash-negative {
+  animation: flash-negative 0.6s ease-out;
+}
+
+.tick-update {
+  animation: tick-update 0.3s ease-out;
+}
+
 /* ─── Angular component host full height ────────────────── */
 app-root { display: flex; flex-direction: column; height: 100vh; }
 app-fi-trading { display: flex; flex-direction: column; flex: 1; min-height: 0; }
