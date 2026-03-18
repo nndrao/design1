@@ -373,7 +373,7 @@ function KRDChart() {
           type: 'column',
           data: filtered.map((d) => ({
             y: d.value,
-            color: d.value >= 0 ? '#14B8A6' : '#FF5252',
+            color: d.value >= 0 ? '#0D9488' : '#E11D63',
           })),
         },
       ],

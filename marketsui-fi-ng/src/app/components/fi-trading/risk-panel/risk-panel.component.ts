@@ -61,7 +61,7 @@ const SECTOR_HEX = [
   '#60A5FA',
   '#60A5FA',
   '#FF9800',
-  '#FF5252',
+  '#E11D63',
   '#5B93D5',
   '#7ABECC',
   '#FF9800',
@@ -453,7 +453,7 @@ export class RiskPanelComponent {
         type: 'column' as const,
         data: buckets.map((b) => ({
           y: b.value,
-          color: b.value >= 0 ? '#14B8A6' : '#FF5252',
+          color: b.value >= 0 ? '#0D9488' : '#E11D63',
         })),
       }],
     };

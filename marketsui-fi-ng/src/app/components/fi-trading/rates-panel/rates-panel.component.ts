@@ -368,8 +368,8 @@ export class RatesPanelComponent {
     const values = krdData.map((d) => d.value);
 
     const style = getComputedStyle(document.documentElement);
-    const buyColor = style.getPropertyValue('--buy').trim() || '#14B8A6';
-    const sellColor = style.getPropertyValue('--sell').trim() || '#FF5252';
+    const buyColor = style.getPropertyValue('--buy').trim() || '#0D9488';
+    const sellColor = style.getPropertyValue('--sell').trim() || '#E11D63';
     const mutedFg = style.getPropertyValue('--muted-foreground').trim() || '#9DA0A5';
     const borderClr = style.getPropertyValue('--border').trim() || '#2C2F33';
 

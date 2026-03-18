@@ -4,6 +4,7 @@
  * Single source of truth for all CSS custom properties.
  * Optimized for financial trading applications:
  *   - High contrast buy/sell for split-second decisions
+ *   - Teal (positive) / Rose-pink (negative) — Robinhood-inspired
  *   - Colorblind-safe chart palette (deuteranopia/protanopia tested)
  *   - Reduced eye strain for extended sessions
  *   - Order status colors distinct from trading colors
@@ -38,7 +39,7 @@
   --accent-foreground: oklch(0.25 0.02 260);
 
   /* ── Semantic: destructive ──────────────────────────────── */
-  --destructive: oklch(0.58 0.24 25);         /* red — aligned with sell */
+  --destructive: oklch(0.62 0.24 5);          /* rose-pink — Robinhood style */
   --destructive-foreground: oklch(0.985 0 0);
 
   /* ── Chrome / borders ───────────────────────────────────── */
@@ -47,36 +48,36 @@
   --ring: oklch(0.55 0.2 260);               /* matches primary */
 
   /* ── Trading: Buy / Sell ────────────────────────────────── */
-  --buy: oklch(0.65 0.2 155);                 /* emerald green — unmistakable "go" */
+  --buy: oklch(0.60 0.17 175);               /* rich teal — vivid on white */
   --buy-foreground: oklch(0.985 0 0);
-  --sell: oklch(0.60 0.22 25);                /* crimson red — unmistakable "stop" */
+  --sell: oklch(0.62 0.24 5);                /* rose-pink — Robinhood style */
   --sell-foreground: oklch(0.985 0 0);
 
   /* ── Trading: P&L / Change ──────────────────────────────── */
-  --positive: oklch(0.65 0.2 155);            /* green for profit */
-  --negative: oklch(0.60 0.22 25);            /* red for loss */
+  --positive: oklch(0.60 0.17 175);           /* teal for profit */
+  --negative: oklch(0.62 0.24 5);            /* rose-pink for loss */
   --unchanged: oklch(0.50 0.015 260);         /* gray for flat */
 
   /* ── Trading: Order status ──────────────────────────────── */
-  --status-filled: oklch(0.65 0.2 155);       /* green */
+  --status-filled: oklch(0.60 0.17 175);      /* teal */
   --status-partial: oklch(0.75 0.18 85);      /* amber */
   --status-working: oklch(0.55 0.2 260);      /* blue (matches primary) */
   --status-cancelled: oklch(0.50 0.015 260);  /* gray */
-  --status-rejected: oklch(0.60 0.22 25);     /* red */
+  --status-rejected: oklch(0.62 0.24 5);     /* rose-pink */
 
   /* ── Alerts ─────────────────────────────────────────────── */
   --warning: oklch(0.80 0.18 85);             /* warm amber */
   --warning-foreground: oklch(0.20 0.05 85);
   --info: oklch(0.60 0.15 240);               /* sky blue */
   --info-foreground: oklch(0.985 0 0);
-  --success: oklch(0.65 0.2 155);             /* green */
+  --success: oklch(0.60 0.17 175);            /* teal */
   --success-foreground: oklch(0.985 0 0);
 
   /* ── Data viz: chart palette (colorblind-safe) ──────────── */
   --chart-1: oklch(0.55 0.2 260);             /* blue (primary) */
-  --chart-2: oklch(0.65 0.2 155);             /* green (buy) */
+  --chart-2: oklch(0.60 0.17 175);            /* teal (buy) */
   --chart-3: oklch(0.75 0.18 85);             /* amber */
-  --chart-4: oklch(0.60 0.22 25);             /* red (sell) */
+  --chart-4: oklch(0.62 0.24 5);             /* rose-pink (sell) */
   --chart-5: oklch(0.62 0.22 310);            /* purple */
 
   /* ── UI: highlights & selection ─────────────────────────── */
@@ -119,7 +120,7 @@
   --accent-foreground: oklch(0.88 0.005 250);
 
   /* ── Semantic: destructive ──────────────────────────────── */
-  --destructive: oklch(0.68 0.2 22);
+  --destructive: oklch(0.72 0.22 5);          /* bright rose-pink for dark bg */
   --destructive-foreground: oklch(0.985 0 0);
 
   /* ── Chrome / borders ───────────────────────────────────── */
@@ -128,36 +129,36 @@
   --ring: oklch(0.68 0.18 260);
 
   /* ── Trading: Buy / Sell ────────────────────────────────── */
-  --buy: oklch(0.72 0.19 155);                /* brighter green for dark bg */
+  --buy: oklch(0.75 0.18 175);               /* bright teal for dark bg */
   --buy-foreground: oklch(0.14 0 0);
-  --sell: oklch(0.68 0.2 22);                 /* brighter red for dark bg */
+  --sell: oklch(0.72 0.22 5);                /* bright rose-pink for dark bg */
   --sell-foreground: oklch(0.985 0 0);
 
   /* ── Trading: P&L / Change ──────────────────────────────── */
-  --positive: oklch(0.72 0.19 155);
-  --negative: oklch(0.68 0.2 22);
+  --positive: oklch(0.75 0.18 175);           /* bright teal */
+  --negative: oklch(0.72 0.22 5);            /* bright rose-pink */
   --unchanged: oklch(0.62 0.01 250);
 
   /* ── Trading: Order status ──────────────────────────────── */
-  --status-filled: oklch(0.72 0.19 155);
+  --status-filled: oklch(0.75 0.18 175);
   --status-partial: oklch(0.80 0.16 85);
   --status-working: oklch(0.68 0.18 260);
   --status-cancelled: oklch(0.62 0.01 250);
-  --status-rejected: oklch(0.68 0.2 22);
+  --status-rejected: oklch(0.72 0.22 5);
 
   /* ── Alerts ─────────────────────────────────────────────── */
   --warning: oklch(0.82 0.16 85);
   --warning-foreground: oklch(0.20 0.05 85);
   --info: oklch(0.68 0.18 260);
   --info-foreground: oklch(0.14 0.008 260);
-  --success: oklch(0.72 0.19 155);
+  --success: oklch(0.75 0.18 175);            /* bright teal */
   --success-foreground: oklch(0.14 0 0);
 
   /* ── Data viz: chart palette ────────────────────────────── */
   --chart-1: oklch(0.68 0.18 260);            /* blue */
-  --chart-2: oklch(0.72 0.19 155);            /* green */
+  --chart-2: oklch(0.75 0.18 175);            /* teal */
   --chart-3: oklch(0.82 0.16 85);             /* amber */
-  --chart-4: oklch(0.68 0.2 22);              /* red */
+  --chart-4: oklch(0.72 0.22 5);             /* rose-pink */
   --chart-5: oklch(0.70 0.2 310);             /* purple */
 
   /* ── UI: highlights & selection ─────────────────────────── */

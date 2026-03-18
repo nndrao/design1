@@ -340,7 +340,7 @@ export class PositionsPanelComponent {
       { label: 'CDS',       dv01: positions.filter(p => p.assetClass === 'CDS').reduce((s, p) => s + p.dv01, 0) },
     ];
 
-    const classColors = ['#60A5FA', '#14B8A6', '#5B93D5', '#FF5252'];
+    const classColors = ['#60A5FA', '#0D9488', '#5B93D5', '#E11D63'];
     const borderColor = '#2C2F33';
     const mutedFg = '#9DA0A5';
 

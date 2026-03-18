@@ -288,7 +288,7 @@ export function RiskPanel() {
           type: 'column',
           data: dv01Buckets.map((b) => ({
             y: b.value,
-            color: b.value >= 0 ? '#14B8A6' : '#FF5252',
+            color: b.value >= 0 ? '#0D9488' : '#E11D63',
           })),
         },
       ],
