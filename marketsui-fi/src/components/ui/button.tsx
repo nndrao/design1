@@ -9,13 +9,13 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-primary text-primary-foreground shadow-sm hover:bg-primary/90',
-        destructive: 'bg-destructive text-white shadow-sm hover:bg-destructive/90',
+        destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
         outline: 'border border-border bg-transparent shadow-sm hover:bg-muted hover:text-foreground',
         secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
         ghost: 'hover:bg-muted hover:text-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
-        buy: 'bg-buy text-white shadow-sm hover:bg-buy/90',
-        sell: 'bg-sell text-white shadow-sm hover:bg-sell/90',
+        buy: 'bg-buy text-buy-foreground shadow-sm hover:bg-buy/90',
+        sell: 'bg-sell text-sell-foreground shadow-sm hover:bg-sell/90',
       },
       size: {
         default: 'h-7 px-3 py-1',

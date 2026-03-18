@@ -160,7 +160,7 @@ export function OrderTicket({ open, onClose }: OrderTicketProps) {
                 value="BUY"
                 className={cn(
                   'flex-1 rounded-full text-xs font-semibold',
-                  side === 'BUY' && 'bg-buy text-white hover:bg-buy/90 hover:text-white data-[state=on]:bg-buy data-[state=on]:text-white'
+                  side === 'BUY' && 'bg-buy text-buy-foreground hover:bg-buy/90 hover:text-buy-foreground data-[state=on]:bg-buy data-[state=on]:text-buy-foreground'
                 )}
               >
                 BUY
@@ -169,7 +169,7 @@ export function OrderTicket({ open, onClose }: OrderTicketProps) {
                 value="SELL"
                 className={cn(
                   'flex-1 rounded-full text-xs font-semibold',
-                  side === 'SELL' && 'bg-sell text-white hover:bg-sell/90 hover:text-white data-[state=on]:bg-sell data-[state=on]:text-white'
+                  side === 'SELL' && 'bg-sell text-sell-foreground hover:bg-sell/90 hover:text-sell-foreground data-[state=on]:bg-sell data-[state=on]:text-sell-foreground'
                 )}
               >
                 SELL
