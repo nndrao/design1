@@ -30,10 +30,10 @@ const krdData: KeyRateDuration[] = [
   template: `
     <div class="h-full grid grid-cols-12 gap-3 p-4">
       <!-- Treasury Grid (left 9 cols) -->
-      <div class="col-span-9 bg-[var(--card)] rounded-xl border border-[var(--border)] overflow-hidden flex flex-col">
-        <div class="flex items-center gap-2 px-3 py-2 border-b border-[var(--border)]">
+      <div class="col-span-9 bg-card rounded-xl border border-border overflow-hidden flex flex-col">
+        <div class="flex items-center gap-2 px-3 py-2 border-b border-border">
           <span class="text-xs font-semibold">Treasury Rates</span>
-          <span class="text-[10px] text-[var(--muted-foreground)]">{{ mds.treasuries().length }} securities</span>
+          <span class="text-[10px] text-muted-foreground">{{ mds.treasuries().length }} securities</span>
         </div>
         <div class="flex-1 min-h-0">
           <ag-grid-angular
@@ -53,17 +53,17 @@ const krdData: KeyRateDuration[] = [
       <!-- Right sidebar (3 cols) -->
       <div class="col-span-3 flex flex-col gap-3">
         <!-- Yield Curve Chart -->
-        <div class="bg-[var(--card)] rounded-xl border border-[var(--border)] overflow-hidden flex flex-col" style="height: 200px;">
-          <div class="flex items-center gap-2 px-3 py-2 border-b border-[var(--border)]">
+        <div class="bg-card rounded-xl border border-border overflow-hidden flex flex-col" style="height: 200px;">
+          <div class="flex items-center gap-2 px-3 py-2 border-b border-border">
             <span class="text-xs font-semibold">Yield Curve</span>
             <div class="flex items-center gap-3 ml-auto">
               <div class="flex items-center gap-1">
-                <span class="w-3 h-[2px] bg-[var(--primary)] rounded"></span>
-                <span class="text-[9px] text-[var(--muted-foreground)]">Today</span>
+                <span class="w-3 h-[2px] bg-primary rounded"></span>
+                <span class="text-[9px] text-muted-foreground">Today</span>
               </div>
               <div class="flex items-center gap-1">
-                <span class="w-3 h-[2px] bg-[var(--muted-foreground)] rounded opacity-60"></span>
-                <span class="text-[9px] text-[var(--muted-foreground)]">Prior</span>
+                <span class="w-3 h-[2px] bg-muted-foreground rounded opacity-60"></span>
+                <span class="text-[9px] text-muted-foreground">Prior</span>
               </div>
             </div>
           </div>
@@ -76,14 +76,14 @@ const krdData: KeyRateDuration[] = [
         </div>
 
         <!-- Curve Spreads -->
-        <div class="bg-[var(--card)] rounded-xl border border-[var(--border)] overflow-hidden flex flex-col" style="height: 160px;">
-          <div class="flex items-center gap-2 px-3 py-2 border-b border-[var(--border)]">
+        <div class="bg-card rounded-xl border border-border overflow-hidden flex flex-col" style="height: 160px;">
+          <div class="flex items-center gap-2 px-3 py-2 border-b border-border">
             <span class="text-xs font-semibold">Curve Spreads</span>
           </div>
           <div class="flex-1 min-h-0 grid grid-cols-3 grid-rows-2 gap-2 p-2">
             @for (s of curveSpreads(); track s.label) {
-              <div class="flex flex-col items-center justify-center rounded-lg bg-[var(--secondary)] px-2 py-1.5" style="opacity: 0.5;">
-                <span class="text-[9px] uppercase tracking-wider text-[var(--muted-foreground)] font-medium">{{ s.label }}</span>
+              <div class="flex flex-col items-center justify-center rounded-lg bg-secondary px-2 py-1.5" style="opacity: 0.5;">
+                <span class="text-[9px] uppercase tracking-wider text-muted-foreground font-medium">{{ s.label }}</span>
                 <span
                   class="font-mono text-sm font-semibold"
                   [class.text-buy]="s.value > 0"
@@ -91,15 +91,15 @@ const krdData: KeyRateDuration[] = [
                 >
                   {{ s.value >= 0 ? '+' : '' }}{{ s.value.toFixed(1) }}
                 </span>
-                <span class="text-[8px] text-[var(--muted-foreground)]">bps</span>
+                <span class="text-[8px] text-muted-foreground">bps</span>
               </div>
             }
           </div>
         </div>
 
         <!-- Detail / KRD Panel -->
-        <div class="bg-[var(--card)] rounded-xl border border-[var(--border)] overflow-hidden flex flex-col flex-1">
-          <div class="flex items-center gap-2 px-3 py-2 border-b border-[var(--border)]">
+        <div class="bg-card rounded-xl border border-border overflow-hidden flex flex-col flex-1">
+          <div class="flex items-center gap-2 px-3 py-2 border-b border-border">
             <span class="text-xs font-semibold">
               {{ selectedTreasury() ? 'Security Detail' : 'Key Rate Duration' }}
             </span>
@@ -118,11 +118,11 @@ const krdData: KeyRateDuration[] = [
               <div class="space-y-1 p-3">
                 <div class="flex items-center gap-2 mb-2">
                   <span class="text-sm font-semibold">{{ t.tenor }}</span>
-                  <span class="text-xs text-[var(--muted-foreground)]">{{ t.security }}</span>
+                  <span class="text-xs text-muted-foreground">{{ t.security }}</span>
                 </div>
                 @for (r of getDetailRows(t); track r.label) {
                   <div class="flex justify-between text-[11px] py-0.5">
-                    <span class="text-[var(--muted-foreground)]">{{ r.label }}</span>
+                    <span class="text-muted-foreground">{{ r.label }}</span>
                     <span class="font-mono font-medium">{{ r.value }}</span>
                   </div>
                 }
@@ -130,7 +130,7 @@ const krdData: KeyRateDuration[] = [
             } @else {
               <!-- KRD Bar Chart -->
               <div class="h-full p-2 flex flex-col">
-                <span class="text-[10px] uppercase tracking-wider text-[var(--muted-foreground)] font-medium px-1 mb-1">Key Rate Duration</span>
+                <span class="text-[10px] uppercase tracking-wider text-muted-foreground font-medium px-1 mb-1">Key Rate Duration</span>
                 <div class="flex-1">
                   <highcharts-chart
                     [options]="krdChartOptions"

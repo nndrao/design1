@@ -217,39 +217,39 @@ const SHADOWS = [
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, TableModule],
   template: `
-    <div class="h-full overflow-y-auto p-4 space-y-6 bg-[var(--background)]">
-      <h1 class="text-2xl font-bold text-[var(--foreground)]">Design System</h1>
+    <div class="h-full overflow-y-auto p-4 space-y-6 bg-background">
+      <h1 class="text-2xl font-bold text-foreground">Design System</h1>
 
       <!-- Color Palette -->
-      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-6">
-        <h2 class="text-lg font-semibold text-[var(--card-foreground)] mb-4">Color Palette</h2>
+      <div class="bg-card border border-border rounded-xl p-6">
+        <h2 class="text-lg font-semibold text-card-foreground mb-4">Color Palette</h2>
         <div class="overflow-x-auto">
           <p-table [value]="flatRows" [scrollable]="true" styleClass="p-datatable-sm p-datatable-gridlines">
             <ng-template pTemplate="header">
               <tr>
-                <th class="!text-xs !font-semibold !text-[var(--muted-foreground)] uppercase tracking-wider" style="width:60px">Swatch</th>
-                <th class="!text-xs !font-semibold !text-[var(--muted-foreground)] uppercase tracking-wider">Token</th>
-                <th class="!text-xs !font-semibold !text-[var(--muted-foreground)] uppercase tracking-wider">CSS Variable</th>
-                <th class="!text-xs !font-semibold !text-[var(--muted-foreground)] uppercase tracking-wider">Tailwind</th>
-                <th class="!text-xs !font-semibold !text-[var(--muted-foreground)] uppercase tracking-wider">Description</th>
+                <th class="!text-xs !font-semibold !text-muted-foreground uppercase tracking-wider" style="width:60px">Swatch</th>
+                <th class="!text-xs !font-semibold !text-muted-foreground uppercase tracking-wider">Token</th>
+                <th class="!text-xs !font-semibold !text-muted-foreground uppercase tracking-wider">CSS Variable</th>
+                <th class="!text-xs !font-semibold !text-muted-foreground uppercase tracking-wider">Tailwind</th>
+                <th class="!text-xs !font-semibold !text-muted-foreground uppercase tracking-wider">Description</th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-row>
               @if (row.isGroupHeader) {
                 <tr>
-                  <td colspan="5" class="!pt-4 !pb-1 !px-3 !text-xs !font-semibold uppercase tracking-wider !text-[var(--muted-foreground)] !bg-transparent !border-0">
+                  <td colspan="5" class="!pt-4 !pb-1 !px-3 !text-xs !font-semibold uppercase tracking-wider !text-muted-foreground !bg-transparent !border-0">
                     {{ row.groupLabel }}
                   </td>
                 </tr>
               } @else {
                 <tr>
                   <td class="!px-3 !py-2">
-                    <div class="w-8 h-8 rounded-md border border-[var(--border)]" [style.background]="'var(' + row.token + ')'"></div>
+                    <div class="w-8 h-8 rounded-md border border-border" [style.background]="'var(' + row.token + ')'"></div>
                   </td>
-                  <td class="!px-3 !py-2 font-mono !text-xs !text-[var(--foreground)]">{{ row.token }}</td>
-                  <td class="!px-3 !py-2 font-mono !text-xs !text-[var(--muted-foreground)]">{{ row.cssVar }}</td>
-                  <td class="!px-3 !py-2 font-mono !text-xs !text-[var(--muted-foreground)]">{{ row.tailwind }}</td>
-                  <td class="!px-3 !py-2 !text-sm !text-[var(--muted-foreground)]">{{ row.description }}</td>
+                  <td class="!px-3 !py-2 font-mono !text-xs !text-foreground">{{ row.token }}</td>
+                  <td class="!px-3 !py-2 font-mono !text-xs !text-muted-foreground">{{ row.cssVar }}</td>
+                  <td class="!px-3 !py-2 font-mono !text-xs !text-muted-foreground">{{ row.tailwind }}</td>
+                  <td class="!px-3 !py-2 !text-sm !text-muted-foreground">{{ row.description }}</td>
                 </tr>
               }
             </ng-template>
@@ -258,17 +258,17 @@ const SHADOWS = [
       </div>
 
       <!-- Typography -->
-      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-6">
-        <h2 class="text-lg font-semibold text-[var(--card-foreground)] mb-4">Typography</h2>
+      <div class="bg-card border border-border rounded-xl p-6">
+        <h2 class="text-lg font-semibold text-card-foreground mb-4">Typography</h2>
         <div class="space-y-6">
           <!-- Font Sizes -->
           <div>
-            <h3 class="text-sm font-semibold text-[var(--muted-foreground)] mb-3">Font Family: Inter</h3>
+            <h3 class="text-sm font-semibold text-muted-foreground mb-3">Font Family: Inter</h3>
             <div class="space-y-3">
               @for (s of typeSizes; track s.label) {
                 <div class="flex items-baseline gap-4">
-                  <span class="w-24 shrink-0 font-mono text-xs text-[var(--muted-foreground)]">{{ s.label }} ({{ s.size }})</span>
-                  <span [style.fontSize]="s.size" [style.fontFamily]="'Inter, sans-serif'" class="text-[var(--foreground)]">
+                  <span class="w-24 shrink-0 font-mono text-xs text-muted-foreground">{{ s.label }} ({{ s.size }})</span>
+                  <span [style.fontSize]="s.size" [style.fontFamily]="'Inter, sans-serif'" class="text-foreground">
                     The quick brown fox jumps over the lazy dog
                   </span>
                 </div>
@@ -277,13 +277,13 @@ const SHADOWS = [
           </div>
 
           <!-- Font Weights -->
-          <div class="border-t border-[var(--border)] pt-4">
-            <h3 class="text-sm font-semibold text-[var(--muted-foreground)] mb-3">Font Weights</h3>
+          <div class="border-t border-border pt-4">
+            <h3 class="text-sm font-semibold text-muted-foreground mb-3">Font Weights</h3>
             <div class="space-y-2">
               @for (w of fontWeights; track w.weight) {
                 <div class="flex items-baseline gap-4">
-                  <span class="w-24 shrink-0 font-mono text-xs text-[var(--muted-foreground)]">{{ w.weight }}</span>
-                  <span class="text-sm text-[var(--foreground)]" [style.fontWeight]="w.weight" [style.fontFamily]="'Inter, sans-serif'">
+                  <span class="w-24 shrink-0 font-mono text-xs text-muted-foreground">{{ w.weight }}</span>
+                  <span class="text-sm text-foreground" [style.fontWeight]="w.weight" [style.fontFamily]="'Inter, sans-serif'">
                     {{ w.label }} &mdash; Trading Dashboard 123,456.78
                   </span>
                 </div>
@@ -292,13 +292,13 @@ const SHADOWS = [
           </div>
 
           <!-- Monospace -->
-          <div class="border-t border-[var(--border)] pt-4">
-            <h3 class="text-sm font-semibold text-[var(--muted-foreground)] mb-3">Monospace: JetBrains Mono</h3>
+          <div class="border-t border-border pt-4">
+            <h3 class="text-sm font-semibold text-muted-foreground mb-3">Monospace: JetBrains Mono</h3>
             <div class="space-y-2">
               @for (s of monoSizes; track s.label) {
                 <div class="flex items-baseline gap-4">
-                  <span class="w-24 shrink-0 font-mono text-xs text-[var(--muted-foreground)]">{{ s.label }} ({{ s.size }})</span>
-                  <span [style.fontSize]="s.size" [style.fontFamily]="'JetBrains Mono, monospace'" class="text-[var(--foreground)]">
+                  <span class="w-24 shrink-0 font-mono text-xs text-muted-foreground">{{ s.label }} ({{ s.size }})</span>
+                  <span [style.fontSize]="s.size" [style.fontFamily]="'JetBrains Mono, monospace'" class="text-foreground">
                     USD/JPY 149.325 +0.42%
                   </span>
                 </div>
@@ -309,39 +309,39 @@ const SHADOWS = [
       </div>
 
       <!-- Spacing Scale -->
-      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-6">
-        <h2 class="text-lg font-semibold text-[var(--card-foreground)] mb-4">Spacing Scale</h2>
+      <div class="bg-card border border-border rounded-xl p-6">
+        <h2 class="text-lg font-semibold text-card-foreground mb-4">Spacing Scale</h2>
         <div class="space-y-3">
           @for (s of spacingScale; track s.unit) {
             <div class="flex items-center gap-4">
-              <span class="w-20 shrink-0 font-mono text-xs text-[var(--muted-foreground)] text-right">{{ s.unit }} ({{ s.px }}px)</span>
-              <div class="bg-[var(--primary)] rounded-sm" [style.width.px]="s.px" style="height:24px"></div>
+              <span class="w-20 shrink-0 font-mono text-xs text-muted-foreground text-right">{{ s.unit }} ({{ s.px }}px)</span>
+              <div class="bg-primary rounded-sm" [style.width.px]="s.px" style="height:24px"></div>
             </div>
           }
         </div>
       </div>
 
       <!-- Border Radius -->
-      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-6">
-        <h2 class="text-lg font-semibold text-[var(--card-foreground)] mb-4">Border Radius</h2>
+      <div class="bg-card border border-border rounded-xl p-6">
+        <h2 class="text-lg font-semibold text-card-foreground mb-4">Border Radius</h2>
         <div class="flex flex-wrap gap-6">
           @for (r of radii; track r.label) {
             <div class="flex flex-col items-center gap-2">
-              <div class="w-16 h-16 bg-[var(--primary)]" [ngClass]="r.label"></div>
-              <span class="font-mono text-xs text-[var(--muted-foreground)]">{{ r.label }}</span>
+              <div class="w-16 h-16 bg-primary" [ngClass]="r.label"></div>
+              <span class="font-mono text-xs text-muted-foreground">{{ r.label }}</span>
             </div>
           }
         </div>
       </div>
 
       <!-- Shadows -->
-      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-6">
-        <h2 class="text-lg font-semibold text-[var(--card-foreground)] mb-4">Shadows</h2>
+      <div class="bg-card border border-border rounded-xl p-6">
+        <h2 class="text-lg font-semibold text-card-foreground mb-4">Shadows</h2>
         <div class="flex flex-wrap gap-6">
           @for (s of shadows; track s.label) {
             <div class="flex flex-col items-center gap-2">
-              <div class="w-24 h-24 bg-[var(--card)] border border-[var(--border)] rounded-lg flex items-center justify-center" [ngClass]="s.label">
-                <span class="text-xs text-[var(--muted-foreground)] text-center px-1">{{ s.label }}</span>
+              <div class="w-24 h-24 bg-card border border-border rounded-lg flex items-center justify-center" [ngClass]="s.label">
+                <span class="text-xs text-muted-foreground text-center px-1">{{ s.label }}</span>
               </div>
             </div>
           }

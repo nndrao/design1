@@ -68,19 +68,19 @@ const DASHBOARD_POSITIONS: DashboardPosition[] = [
       <!-- KPI Cards Row -->
       <div class="grid grid-cols-5 gap-3">
         @for (kpi of kpiData; track kpi.label) {
-          <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 flex flex-col justify-between">
-            <span class="text-[10px] font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">
+          <div class="bg-card border border-border rounded-xl p-4 flex flex-col justify-between">
+            <span class="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
               {{ kpi.label }}
             </span>
             <span
               class="text-xl font-mono font-semibold mt-1"
               [class.text-buy]="kpi.format === 'pnl' && kpi.value >= 0"
               [class.text-sell]="kpi.format === 'pnl' && kpi.value < 0"
-              [class.text-[var(--foreground)]]="kpi.format !== 'pnl'"
+              [class.text-foreground]="kpi.format !== 'pnl'"
             >
               {{ formatKpi(kpi.value, kpi.format) }}
             </span>
-            <span class="text-[10px] text-[var(--muted-foreground)] mt-0.5">{{ kpi.subtitle }}</span>
+            <span class="text-[10px] text-muted-foreground mt-0.5">{{ kpi.subtitle }}</span>
           </div>
         }
       </div>
@@ -88,9 +88,9 @@ const DASHBOARD_POSITIONS: DashboardPosition[] = [
       <!-- Second Row: Yield Curve + Benchmarks + Positions -->
       <div class="grid grid-cols-12 gap-3">
         <!-- Yield Curve Chart -->
-        <div class="col-span-5 bg-[var(--card)] border border-[var(--border)] rounded-xl overflow-hidden flex flex-col">
+        <div class="col-span-5 bg-card border border-border rounded-xl overflow-hidden flex flex-col">
           <div class="px-4 pt-3 pb-2">
-            <h3 class="text-[10px] font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Yield Curve</h3>
+            <h3 class="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Yield Curve</h3>
           </div>
           <div class="flex-1 min-h-0 px-4 pb-3" style="height: 280px;">
             <highcharts-chart
@@ -101,16 +101,16 @@ const DASHBOARD_POSITIONS: DashboardPosition[] = [
         </div>
 
         <!-- Key Benchmarks -->
-        <div class="col-span-3 bg-[var(--card)] border border-[var(--border)] rounded-xl overflow-hidden flex flex-col">
+        <div class="col-span-3 bg-card border border-border rounded-xl overflow-hidden flex flex-col">
           <div class="px-4 pt-3 pb-2">
-            <h3 class="text-[10px] font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Key Benchmarks</h3>
+            <h3 class="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Key Benchmarks</h3>
           </div>
           <div class="flex-1 min-h-0 overflow-auto px-4 pb-3">
             @for (b of benchmarks(); track b.label) {
-              <div class="flex items-center justify-between py-2 border-b border-[var(--border)] last:border-b-0" style="border-opacity: 0.5;">
-                <span class="text-xs text-[var(--muted-foreground)]">{{ b.label }}</span>
+              <div class="flex items-center justify-between py-2 border-b border-border last:border-b-0" style="border-opacity: 0.5;">
+                <span class="text-xs text-muted-foreground">{{ b.label }}</span>
                 <div class="flex items-center gap-2">
-                  <span class="text-xs font-mono text-[var(--foreground)]">
+                  <span class="text-xs font-mono text-foreground">
                     {{ formatBenchmarkValue(b) }}
                   </span>
                   @if (b.change !== 0 && b.unit !== 'slope') {
@@ -125,13 +125,13 @@ const DASHBOARD_POSITIONS: DashboardPosition[] = [
         </div>
 
         <!-- Position Summary -->
-        <div class="col-span-4 bg-[var(--card)] border border-[var(--border)] rounded-xl overflow-hidden flex flex-col">
+        <div class="col-span-4 bg-card border border-border rounded-xl overflow-hidden flex flex-col">
           <div class="px-4 pt-3 pb-2">
-            <h3 class="text-[10px] font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Position Summary</h3>
+            <h3 class="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Position Summary</h3>
           </div>
           <div class="flex-1 min-h-0 overflow-auto px-4 pb-3">
             @for (pos of positions; track pos.security) {
-              <div class="flex items-center justify-between py-1.5 border-b border-[var(--border)] last:border-b-0" style="border-opacity: 0.5;">
+              <div class="flex items-center justify-between py-1.5 border-b border-border last:border-b-0" style="border-opacity: 0.5;">
                 <div class="flex items-center gap-2 min-w-0">
                   <span
                     class="text-[10px] font-mono w-4 text-center"
@@ -140,13 +140,13 @@ const DASHBOARD_POSITIONS: DashboardPosition[] = [
                   >
                     {{ pos.direction === 'Long' ? '\u2191' : '\u2193' }}
                   </span>
-                  <span class="text-xs text-[var(--foreground)] truncate">{{ pos.security }}</span>
+                  <span class="text-xs text-foreground truncate">{{ pos.security }}</span>
                 </div>
                 <div class="flex items-center gap-3 shrink-0">
                   <span class="text-xs font-mono" [class.text-buy]="pos.pnl >= 0" [class.text-sell]="pos.pnl < 0">
                     {{ fmtPnL(pos.pnl) }}
                   </span>
-                  <span class="text-[10px] font-mono text-[var(--muted-foreground)]">
+                  <span class="text-[10px] font-mono text-muted-foreground">
                     {{ fmtDV01(pos.dv01) }}
                   </span>
                 </div>
@@ -157,33 +157,33 @@ const DASHBOARD_POSITIONS: DashboardPosition[] = [
       </div>
 
       <!-- Recent Orders -->
-      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl overflow-hidden">
+      <div class="bg-card border border-border rounded-xl overflow-hidden">
         <div class="px-4 pt-3 pb-2">
-          <h3 class="text-[10px] font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Recent Orders</h3>
+          <h3 class="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Recent Orders</h3>
         </div>
         <div class="px-4 pb-3">
           <p-table [value]="orders" [tableStyle]="{ 'min-width': '100%' }" styleClass="p-datatable-sm">
             <ng-template #header>
               <tr>
-                <th class="text-left text-[10px] font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Time</th>
-                <th class="text-left text-[10px] font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Security</th>
-                <th class="text-left text-[10px] font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Side</th>
-                <th class="text-right text-[10px] font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Size</th>
-                <th class="text-right text-[10px] font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Yield / Price</th>
-                <th class="text-right text-[10px] font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Status</th>
+                <th class="text-left text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Time</th>
+                <th class="text-left text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Security</th>
+                <th class="text-left text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Side</th>
+                <th class="text-right text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Size</th>
+                <th class="text-right text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Yield / Price</th>
+                <th class="text-right text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Status</th>
               </tr>
             </ng-template>
             <ng-template #body let-order>
-              <tr class="hover:bg-[var(--secondary)] transition-colors" style="opacity: 0.4;">
-                <td class="font-mono text-[var(--muted-foreground)] text-xs">{{ order.time }}</td>
-                <td class="text-[var(--foreground)] text-xs">{{ order.security }}</td>
+              <tr class="hover:bg-secondary transition-colors" style="opacity: 0.4;">
+                <td class="font-mono text-muted-foreground text-xs">{{ order.time }}</td>
+                <td class="text-foreground text-xs">{{ order.security }}</td>
                 <td class="text-xs">
                   <span [class.text-buy]="order.side === 'Buy'" [class.text-sell]="order.side === 'Sell'">
                     {{ order.side }}
                   </span>
                 </td>
-                <td class="text-right font-mono text-[var(--foreground)] text-xs">{{ order.size }}</td>
-                <td class="text-right font-mono text-[var(--foreground)] text-xs">{{ order.yieldPrice }}</td>
+                <td class="text-right font-mono text-foreground text-xs">{{ order.size }}</td>
+                <td class="text-right font-mono text-foreground text-xs">{{ order.yieldPrice }}</td>
                 <td class="text-right text-xs">
                   <span
                     class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium"
@@ -280,14 +280,14 @@ export class DashboardPanelComponent {
 
   getStatusClass(status: string): Record<string, boolean> {
     return {
-      'bg-[var(--buy)]': status === 'Filled',
-      'text-[var(--buy-foreground)]': status === 'Filled',
-      'bg-[var(--primary)]': status === 'Working',
+      'bg-buy': status === 'Filled',
+      'text-buy-foreground': status === 'Filled',
+      'bg-primary': status === 'Working',
       'text-white': status === 'Working',
-      'bg-[var(--warning)]': status === 'Partial',
-      'text-[var(--warning-foreground)]': status === 'Partial',
-      'bg-[var(--muted)]': status === 'Cancelled',
-      'text-[var(--muted-foreground)]': status === 'Cancelled',
+      'bg-warning': status === 'Partial',
+      'text-warning-foreground': status === 'Partial',
+      'bg-muted': status === 'Cancelled',
+      'text-muted-foreground': status === 'Cancelled',
     };
   }
 }

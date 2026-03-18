@@ -12,10 +12,10 @@ import { fmtYield, fmtChgBps } from '../../../shared/utils';
   imports: [CommonModule, ButtonModule, TooltipModule],
   template: `
     <!-- Header Bar -->
-    <header class="flex items-center justify-between border-b border-[var(--border)] bg-[var(--card)] px-5 h-12 shrink-0">
+    <header class="flex items-center justify-between border-b border-border bg-card px-5 h-12 shrink-0">
       <div class="flex items-center gap-3">
         <span class="text-sm font-semibold tracking-tight">
-          <span class="text-[var(--foreground)]">Markets</span><span class="text-[var(--primary)]">UI</span>
+          <span class="text-foreground">Markets</span><span class="text-primary">UI</span>
         </span>
       </div>
 
@@ -24,11 +24,11 @@ import { fmtYield, fmtChgBps } from '../../../shared/utils';
           [text]="true"
           [rounded]="true"
           severity="secondary"
-          styleClass="flex items-center gap-2 rounded-full bg-[var(--secondary)] border border-[var(--border)] text-xs text-[var(--muted-foreground)] hover:text-[var(--foreground)] h-8 px-3"
+          styleClass="flex items-center gap-2 rounded-full bg-secondary border border-border text-xs text-muted-foreground hover:text-foreground h-8 px-3"
         >
           <i class="pi pi-search text-xs"></i>
           <span class="text-xs">Search bonds...</span>
-          <kbd class="ml-1 px-1.5 py-0.5 rounded bg-[var(--muted)] text-[10px] font-mono">&#8984;K</kbd>
+          <kbd class="ml-1 px-1.5 py-0.5 rounded bg-muted text-[10px] font-mono">&#8984;K</kbd>
         </p-button>
 
         <p-button
@@ -37,7 +37,7 @@ import { fmtYield, fmtChgBps } from '../../../shared/utils';
           severity="secondary"
           icon="pi pi-bell"
           pTooltip="Notifications"
-          styleClass="text-[var(--muted-foreground)] hover:text-[var(--foreground)] w-8 h-8"
+          styleClass="text-muted-foreground hover:text-foreground w-8 h-8"
         />
 
         <p-button
@@ -46,10 +46,10 @@ import { fmtYield, fmtChgBps } from '../../../shared/utils';
           severity="secondary"
           icon="pi pi-cog"
           pTooltip="Settings"
-          styleClass="text-[var(--muted-foreground)] hover:text-[var(--foreground)] w-8 h-8"
+          styleClass="text-muted-foreground hover:text-foreground w-8 h-8"
         />
 
-        <div class="h-5 w-px bg-[var(--border)] mx-0.5"></div>
+        <div class="h-5 w-px bg-border mx-0.5"></div>
 
         <p-button
           [outlined]="true"
@@ -65,7 +65,7 @@ import { fmtYield, fmtChgBps } from '../../../shared/utils';
     </header>
 
     <!-- Market Status / Ticker Bar -->
-    <div class="flex items-center justify-between border-b border-[var(--border)] bg-[var(--card)] px-4 h-8 text-[11px] font-mono shrink-0" style="opacity: 0.8; backdrop-filter: blur(12px);">
+    <div class="flex items-center justify-between border-b border-border bg-card px-4 h-8 text-[11px] font-mono shrink-0" style="opacity: 0.8; backdrop-filter: blur(12px);">
       <!-- Left: status + yields -->
       <div class="flex items-center gap-4">
         <!-- Market status -->
@@ -76,18 +76,18 @@ import { fmtYield, fmtChgBps } from '../../../shared/utils';
             [class.pulse-dot]="isMarketOpen()"
             [class.bg-sell]="!isMarketOpen()"
           ></span>
-          <span class="text-[var(--muted-foreground)] text-[10px] uppercase tracking-wider">
+          <span class="text-muted-foreground text-[10px] uppercase tracking-wider">
             {{ isMarketOpen() ? 'Market Open' : 'Market Closed' }}
           </span>
         </div>
 
-        <div class="h-3 w-px bg-[var(--border)]"></div>
+        <div class="h-3 w-px bg-border"></div>
 
         <!-- Treasury yields -->
         @for (b of tickerBenchmarks(); track b.label) {
           <div class="flex items-center gap-1">
-            <span class="text-[var(--muted-foreground)]">{{ b.label }}</span>
-            <span class="text-[var(--foreground)]">{{ b.fmtMid }}</span>
+            <span class="text-muted-foreground">{{ b.label }}</span>
+            <span class="text-foreground">{{ b.fmtMid }}</span>
             @if (b.chg !== undefined) {
               <span class="text-[10px]" [class.text-sell]="b.chg >= 0" [class.text-buy]="b.chg < 0">
                 {{ b.fmtChg }}
@@ -96,21 +96,21 @@ import { fmtYield, fmtChgBps } from '../../../shared/utils';
           </div>
         }
 
-        <div class="h-3 w-px bg-[var(--border)]"></div>
+        <div class="h-3 w-px bg-border"></div>
 
         <!-- 2s10s -->
         <div class="flex items-center gap-1">
-          <span class="text-[var(--muted-foreground)]">2s10s</span>
-          <span class="text-[var(--foreground)]">{{ slope2s10s() }} bps</span>
+          <span class="text-muted-foreground">2s10s</span>
+          <span class="text-foreground">{{ slope2s10s() }} bps</span>
         </div>
 
-        <div class="h-3 w-px bg-[var(--border)]"></div>
+        <div class="h-3 w-px bg-border"></div>
 
         <!-- CDX indices -->
         @for (c of cdxTicker(); track c.label) {
           <div class="flex items-center gap-1">
-            <span class="text-[var(--muted-foreground)]">{{ c.label }}</span>
-            <span class="text-[var(--foreground)]">{{ c.fmtMid }}</span>
+            <span class="text-muted-foreground">{{ c.label }}</span>
+            <span class="text-foreground">{{ c.fmtMid }}</span>
             <span class="text-[10px]" [class.text-sell]="c.chg >= 0" [class.text-buy]="c.chg < 0">
               {{ c.fmtChg }}
             </span>
@@ -119,7 +119,7 @@ import { fmtYield, fmtChgBps } from '../../../shared/utils';
       </div>
 
       <!-- Right: ET time -->
-      <div class="text-[var(--muted-foreground)]">
+      <div class="text-muted-foreground">
         {{ etTime() }} <span class="text-[9px] tracking-wider">ET</span>
       </div>
     </div>

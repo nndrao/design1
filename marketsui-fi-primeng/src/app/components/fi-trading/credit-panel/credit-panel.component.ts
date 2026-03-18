@@ -36,15 +36,15 @@ function getRatingColor(bucket: RatingBucket): string {
   template: `
     <div class="h-full grid grid-cols-12 gap-3 p-4" style="grid-template-rows: 1fr auto;">
       <!-- Corporate Bonds Grid (left 9 cols, full height row 1) -->
-      <div class="col-span-9 row-span-1 bg-[var(--card)] rounded-xl border border-[var(--border)] overflow-hidden flex flex-col">
-        <div class="flex items-center gap-2 px-3 py-2 border-b border-[var(--border)]">
+      <div class="col-span-9 row-span-1 bg-card rounded-xl border border-border overflow-hidden flex flex-col">
+        <div class="flex items-center gap-2 px-3 py-2 border-b border-border">
           <span class="text-xs font-semibold">Corporate Bonds</span>
-          <span class="text-[10px] text-[var(--muted-foreground)]">{{ mds.corpBonds().length }} bonds</span>
+          <span class="text-[10px] text-muted-foreground">{{ mds.corpBonds().length }} bonds</span>
           <div class="flex items-center gap-1.5 ml-auto">
-            <span class="text-[9px] px-1.5 py-0.5 rounded-full font-medium bg-[var(--secondary)] text-[var(--muted-foreground)]">
+            <span class="text-[9px] px-1.5 py-0.5 rounded-full font-medium bg-secondary text-muted-foreground">
               IG {{ igCount() }}
             </span>
-            <span class="text-[9px] px-1.5 py-0.5 rounded-full font-medium bg-[var(--secondary)] text-[var(--muted-foreground)]">
+            <span class="text-[9px] px-1.5 py-0.5 rounded-full font-medium bg-secondary text-muted-foreground">
               HY {{ hyCount() }}
             </span>
           </div>
@@ -64,10 +64,10 @@ function getRatingColor(bucket: RatingBucket): string {
       </div>
 
       <!-- CDX Indices (right 3 cols, row 1) -->
-      <div class="col-span-3 row-span-1 bg-[var(--card)] rounded-xl border border-[var(--border)] overflow-hidden flex flex-col">
-        <div class="flex items-center gap-2 px-3 py-2 border-b border-[var(--border)]">
+      <div class="col-span-3 row-span-1 bg-card rounded-xl border border-border overflow-hidden flex flex-col">
+        <div class="flex items-center gap-2 px-3 py-2 border-b border-border">
           <span class="text-xs font-semibold">CDX Indices</span>
-          <span class="text-[9px] bg-[var(--secondary)] px-1.5 py-0.5 rounded-full text-[var(--muted-foreground)] font-medium">
+          <span class="text-[9px] bg-secondary px-1.5 py-0.5 rounded-full text-muted-foreground font-medium">
             {{ mds.cdxIndices().length }}
           </span>
         </div>
@@ -86,10 +86,10 @@ function getRatingColor(bucket: RatingBucket): string {
       </div>
 
       <!-- Single-Name CDS (full width, row 2) -->
-      <div class="col-span-12 bg-[var(--card)] rounded-xl border border-[var(--border)] overflow-hidden flex flex-col" style="height: 280px;">
-        <div class="flex items-center gap-2 px-3 py-2 border-b border-[var(--border)]">
+      <div class="col-span-12 bg-card rounded-xl border border-border overflow-hidden flex flex-col" style="height: 280px;">
+        <div class="flex items-center gap-2 px-3 py-2 border-b border-border">
           <span class="text-xs font-semibold">Single-Name CDS</span>
-          <span class="text-[9px] bg-[var(--secondary)] px-1.5 py-0.5 rounded-full text-[var(--muted-foreground)] font-medium">
+          <span class="text-[9px] bg-secondary px-1.5 py-0.5 rounded-full text-muted-foreground font-medium">
             {{ mds.cdsNames().length }}
           </span>
         </div>
@@ -146,7 +146,7 @@ export class CreditPanelComponent {
     { field: 'askYield', headerName: 'Ask Yld', width: 78, type: 'rightAligned', cellClass: 'font-mono text-sell', valueFormatter: p => p.value != null ? p.value.toFixed(3) : '' },
     { field: 'bidPrice', headerName: 'Bid Px', width: 72, type: 'rightAligned', cellClass: 'font-mono text-buy', valueFormatter: p => p.value != null ? p.value.toFixed(2) : '' },
     { field: 'askPrice', headerName: 'Ask Px', width: 72, type: 'rightAligned', cellClass: 'font-mono text-sell', valueFormatter: p => p.value != null ? p.value.toFixed(2) : '' },
-    { field: 'zSpread', headerName: 'Z-Spd', width: 72, type: 'rightAligned', cellClass: 'font-mono text-[var(--primary)]', valueFormatter: p => p.value != null ? Math.round(p.value).toString() : '' },
+    { field: 'zSpread', headerName: 'Z-Spd', width: 72, type: 'rightAligned', cellClass: 'font-mono text-primary', valueFormatter: p => p.value != null ? Math.round(p.value).toString() : '' },
     { field: 'oas', headerName: 'OAS', width: 72, type: 'rightAligned', cellClass: 'font-mono', valueFormatter: p => p.value != null ? Math.round(p.value).toString() : '' },
     {
       field: 'changeBps', headerName: 'Chg bps', width: 76, type: 'rightAligned', cellClass: 'font-mono',

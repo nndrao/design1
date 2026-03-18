@@ -53,25 +53,25 @@ const TABS: FITab[] = [
     ComponentsPanelComponent,
   ],
   template: `
-    <div class="flex flex-col h-full bg-[var(--background)]">
+    <div class="flex flex-col h-full bg-background">
       <!-- Header + Ticker -->
       <app-header />
 
       <!-- Tab Bar -->
-      <div class="flex items-center border-b border-[var(--border)] bg-[var(--card)] px-4 shrink-0">
+      <div class="flex items-center border-b border-border bg-card px-4 shrink-0">
         @for (tab of tabs; track tab; let i = $index) {
           <button
             class="relative px-4 py-2.5 text-xs font-medium transition-colors whitespace-nowrap"
-            [class.text-[var(--primary)]]="activeTab() === tab"
-            [class.text-[var(--muted-foreground)]]="activeTab() !== tab"
-            [class.hover:text-[var(--foreground)]]="activeTab() !== tab"
+            [class.text-primary]="activeTab() === tab"
+            [class.text-muted-foreground]="activeTab() !== tab"
+            [class.hover:text-foreground]="activeTab() !== tab"
             (click)="setActiveTab(tab)"
           >
             {{ tab }}
             @if (activeTab() === tab) {
-              <span class="absolute bottom-0 left-1 right-1 h-[2px] rounded-full bg-[var(--primary)]"></span>
+              <span class="absolute bottom-0 left-1 right-1 h-[2px] rounded-full bg-primary"></span>
             }
-            <span class="ml-1 text-[9px] text-[var(--muted-foreground)] opacity-50 font-mono">{{ i + 1 }}</span>
+            <span class="ml-1 text-[9px] text-muted-foreground opacity-50 font-mono">{{ i + 1 }}</span>
           </button>
         }
       </div>

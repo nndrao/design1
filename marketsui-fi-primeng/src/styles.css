@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
-@import "tailwindcss";
 @import "../../marketsui-design-system/tokens/marketsui-tokens.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* ── PrimeNG theme integration via design tokens ────────── */
 @layer base {
@@ -29,18 +32,19 @@
   }
 }
 
-
 /* ── Trading utility classes ───────────────────────────── */
-@utility text-buy { color: var(--buy); }
-@utility text-sell { color: var(--sell); }
-@utility text-positive { color: var(--positive); }
-@utility text-negative { color: var(--negative); }
-@utility text-warning { color: var(--warning); }
-@utility bg-buy { background-color: var(--buy); }
-@utility bg-sell { background-color: var(--sell); }
-@utility bg-card { background-color: var(--card); }
-@utility text-buy-foreground { color: var(--buy-foreground); }
-@utility text-sell-foreground { color: var(--sell-foreground); }
+@layer utilities {
+  .text-buy { color: var(--buy); }
+  .text-sell { color: var(--sell); }
+  .text-positive { color: var(--positive); }
+  .text-negative { color: var(--negative); }
+  .text-warning { color: var(--warning); }
+  .bg-buy { background-color: var(--buy); }
+  .bg-sell { background-color: var(--sell); }
+  .bg-card { background-color: var(--card); }
+  .text-buy-foreground { color: var(--buy-foreground); }
+  .text-sell-foreground { color: var(--sell-foreground); }
+}
 
 /* ── Flash animations ──────────────────────────────────── */
 @keyframes pulse-dot { 0%,100%{transform:scale(1);opacity:.7} 50%{transform:scale(1.3);opacity:1} }

@@ -61,17 +61,17 @@ import { Popover } from 'primeng/popover';
     PopoverModule,
   ],
   template: `
-    <div class="h-full overflow-y-auto p-4 space-y-4 bg-[var(--background)]">
-      <h1 class="text-lg font-bold text-[var(--foreground)] tracking-tight">Component Showcase</h1>
-      <p class="text-xs text-[var(--muted-foreground)] -mt-2">All PrimeNG components available in this project</p>
+    <div class="h-full overflow-y-auto p-4 space-y-4 bg-background">
+      <h1 class="text-lg font-bold text-foreground tracking-tight">Component Showcase</h1>
+      <p class="text-xs text-muted-foreground -mt-2">All PrimeNG components available in this project</p>
 
       <!-- 1. Button -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Button</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Button</h2>
         <div class="space-y-3">
           @for (sev of buttonSeverities; track sev) {
             <div class="space-y-1">
-              <span class="text-xs font-medium text-[var(--muted-foreground)] capitalize">{{ sev || 'primary' }}</span>
+              <span class="text-xs font-medium text-muted-foreground capitalize">{{ sev || 'primary' }}</span>
               <div class="flex items-center gap-2 flex-wrap">
                 <p-button [label]="(sev || 'primary') + ' sm'" [severity]="sev" size="small" />
                 <p-button [label]="sev || 'primary'" [severity]="sev" />
@@ -86,45 +86,45 @@ import { Popover } from 'primeng/popover';
       </section>
 
       <!-- 2. Input -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Input</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Input</h2>
         <div class="grid grid-cols-2 gap-3 max-w-lg">
           <div class="space-y-1">
-            <label class="text-xs text-[var(--muted-foreground)]">Text</label>
+            <label class="text-xs text-muted-foreground">Text</label>
             <input pInputText placeholder="Enter symbol..." class="w-full" />
           </div>
           <div class="space-y-1">
-            <label class="text-xs text-[var(--muted-foreground)]">Number</label>
+            <label class="text-xs text-muted-foreground">Number</label>
             <input pInputText type="number" placeholder="0.00" class="w-full" />
           </div>
           <div class="space-y-1">
-            <label class="text-xs text-[var(--muted-foreground)]">Disabled</label>
+            <label class="text-xs text-muted-foreground">Disabled</label>
             <input pInputText disabled placeholder="Disabled" class="w-full" />
           </div>
           <div class="space-y-1">
-            <label class="text-xs text-[var(--muted-foreground)]">With value</label>
+            <label class="text-xs text-muted-foreground">With value</label>
             <input pInputText value="USD/JPY" class="w-full" />
           </div>
         </div>
       </section>
 
       <!-- 3. Select -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Select</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Select</h2>
         <div class="max-w-xs space-y-1">
-          <label class="text-xs text-[var(--muted-foreground)]">Currency Pair</label>
+          <label class="text-xs text-muted-foreground">Currency Pair</label>
           <p-select [options]="currencyPairs" [(ngModel)]="selectedPair" placeholder="Select pair" styleClass="w-full" />
-          <p class="text-xs text-[var(--muted-foreground)]">Selected: {{ selectedPair() }}</p>
+          <p class="text-xs text-muted-foreground">Selected: {{ selectedPair() }}</p>
         </div>
       </section>
 
       <!-- 4. Dialog -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Dialog</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Dialog</h2>
         <p-button label="Open Dialog" (click)="dialogVisible.set(true)" />
-        <p class="text-xs text-[var(--muted-foreground)]">Dialog is {{ dialogVisible() ? 'open' : 'closed' }}</p>
+        <p class="text-xs text-muted-foreground">Dialog is {{ dialogVisible() ? 'open' : 'closed' }}</p>
         <p-dialog header="Confirm Trade" [(visible)]="dialogVisible" [modal]="true" [style]="{width: '400px'}">
-          <p class="text-xs text-[var(--foreground)]">Buy 10,000 USD/JPY at market price. This action cannot be undone.</p>
+          <p class="text-xs text-foreground">Buy 10,000 USD/JPY at market price. This action cannot be undone.</p>
           <ng-template pTemplate="footer">
             <p-button label="Cancel" severity="secondary" [outlined]="true" (click)="dialogVisible.set(false)" />
             <p-button label="Confirm" (click)="dialogVisible.set(false)" />
@@ -133,8 +133,8 @@ import { Popover } from 'primeng/popover';
       </section>
 
       <!-- 5. Tag -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Tag</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Tag</h2>
         <div class="flex flex-wrap gap-2">
           <p-tag value="Primary" />
           <p-tag value="Success" severity="success" />
@@ -147,8 +147,8 @@ import { Popover } from 'primeng/popover';
       </section>
 
       <!-- 6. Badge -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Badge</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Badge</h2>
         <div class="flex flex-wrap gap-4">
           <p-badge value="4" />
           <p-badge value="2" severity="success" />
@@ -161,8 +161,8 @@ import { Popover } from 'primeng/popover';
       </section>
 
       <!-- 7. Tabs -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Tabs</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Tabs</h2>
         <p-tabs value="0">
           <p-tablist>
             <p-tab value="0">Overview</p-tab>
@@ -171,55 +171,55 @@ import { Popover } from 'primeng/popover';
           </p-tablist>
           <p-tabpanels>
             <p-tabpanel value="0">
-              <p class="text-xs text-[var(--muted-foreground)] py-2">Portfolio summary and recent activity.</p>
+              <p class="text-xs text-muted-foreground py-2">Portfolio summary and recent activity.</p>
             </p-tabpanel>
             <p-tabpanel value="1">
-              <p class="text-xs text-[var(--muted-foreground)] py-2">Performance metrics and P&amp;L charts.</p>
+              <p class="text-xs text-muted-foreground py-2">Performance metrics and P&amp;L charts.</p>
             </p-tabpanel>
             <p-tabpanel value="2">
-              <p class="text-xs text-[var(--muted-foreground)] py-2">Notification and display preferences.</p>
+              <p class="text-xs text-muted-foreground py-2">Notification and display preferences.</p>
             </p-tabpanel>
           </p-tabpanels>
         </p-tabs>
       </section>
 
       <!-- 8. ToggleSwitch -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">ToggleSwitch</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">ToggleSwitch</h2>
         <div class="space-y-3">
           <div class="flex items-center gap-3">
             <p-toggleswitch [(ngModel)]="switchA" />
-            <span class="text-xs text-[var(--foreground)]">Dark mode: {{ switchA() ? 'On' : 'Off' }}</span>
+            <span class="text-xs text-foreground">Dark mode: {{ switchA() ? 'On' : 'Off' }}</span>
           </div>
           <div class="flex items-center gap-3">
             <p-toggleswitch [(ngModel)]="switchB" />
-            <span class="text-xs text-[var(--foreground)]">Notifications: {{ switchB() ? 'On' : 'Off' }}</span>
+            <span class="text-xs text-foreground">Notifications: {{ switchB() ? 'On' : 'Off' }}</span>
           </div>
         </div>
       </section>
 
       <!-- 9. Checkbox -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Checkbox</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Checkbox</h2>
         <div class="space-y-2">
           <div class="flex items-center gap-2">
             <p-checkbox [(ngModel)]="checkA" [binary]="true" inputId="chk1" />
-            <label for="chk1" class="text-xs text-[var(--foreground)] cursor-pointer">Unchecked by default</label>
+            <label for="chk1" class="text-xs text-foreground cursor-pointer">Unchecked by default</label>
           </div>
           <div class="flex items-center gap-2">
             <p-checkbox [(ngModel)]="checkB" [binary]="true" inputId="chk2" />
-            <label for="chk2" class="text-xs text-[var(--foreground)] cursor-pointer">Checked by default</label>
+            <label for="chk2" class="text-xs text-foreground cursor-pointer">Checked by default</label>
           </div>
         </div>
       </section>
 
       <!-- 10. ProgressBar -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">ProgressBar</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">ProgressBar</h2>
         <div class="space-y-3 max-w-md">
           @for (v of progressValues; track v) {
             <div class="space-y-1">
-              <div class="flex justify-between text-xs text-[var(--muted-foreground)]">
+              <div class="flex justify-between text-xs text-muted-foreground">
                 <span>Progress</span>
                 <span>{{ v }}%</span>
               </div>
@@ -230,8 +230,8 @@ import { Popover } from 'primeng/popover';
       </section>
 
       <!-- 11. Tooltip -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Tooltip</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Tooltip</h2>
         <div class="flex gap-3">
           <p-button label="Hover me" severity="secondary" size="small" pTooltip="Top tooltip" tooltipPosition="top" />
           <p-button label="Bottom" [outlined]="true" size="small" pTooltip="Bottom tooltip" tooltipPosition="bottom" />
@@ -240,8 +240,8 @@ import { Popover } from 'primeng/popover';
       </section>
 
       <!-- 12. Avatar -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Avatar</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Avatar</h2>
         <div class="flex gap-3">
           @for (initials of avatarInitials; track initials) {
             <p-avatar [label]="initials" shape="circle" />
@@ -250,21 +250,21 @@ import { Popover } from 'primeng/popover';
       </section>
 
       <!-- 13. Card -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Card</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Card</h2>
         <p-card header="Order Summary" subheader="Review your trade details">
           <div class="space-y-2">
             <div class="flex justify-between text-xs">
-              <span class="text-[var(--muted-foreground)]">Instrument</span>
-              <span class="text-[var(--foreground)] font-medium">US 10Y T-Note</span>
+              <span class="text-muted-foreground">Instrument</span>
+              <span class="text-foreground font-medium">US 10Y T-Note</span>
             </div>
             <div class="flex justify-between text-xs">
-              <span class="text-[var(--muted-foreground)]">Quantity</span>
-              <span class="text-[var(--foreground)] font-medium">5,000,000</span>
+              <span class="text-muted-foreground">Quantity</span>
+              <span class="text-foreground font-medium">5,000,000</span>
             </div>
             <div class="flex justify-between text-xs">
-              <span class="text-[var(--muted-foreground)]">Price</span>
-              <span class="text-[var(--foreground)] font-medium">99.215</span>
+              <span class="text-muted-foreground">Price</span>
+              <span class="text-foreground font-medium">99.215</span>
             </div>
           </div>
           <ng-template pTemplate="footer">
@@ -277,55 +277,55 @@ import { Popover } from 'primeng/popover';
       </section>
 
       <!-- 14. SelectButton -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">SelectButton</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">SelectButton</h2>
         <div class="space-y-3">
           <div class="space-y-1">
-            <span class="text-xs text-[var(--muted-foreground)]">Single select</span>
+            <span class="text-xs text-muted-foreground">Single select</span>
             <p-selectbutton [options]="alignOptions" [(ngModel)]="selectedAlign" />
           </div>
           <div class="space-y-1">
-            <span class="text-xs text-[var(--muted-foreground)]">Multiple select</span>
+            <span class="text-xs text-muted-foreground">Multiple select</span>
             <p-selectbutton [options]="formatOptions" [(ngModel)]="selectedFormats" [multiple]="true" />
           </div>
         </div>
       </section>
 
       <!-- 15. InputNumber -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">InputNumber</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">InputNumber</h2>
         <div class="grid grid-cols-2 gap-3 max-w-lg">
           <div class="space-y-1">
-            <label class="text-xs text-[var(--muted-foreground)]">Integer</label>
+            <label class="text-xs text-muted-foreground">Integer</label>
             <p-inputnumber [(ngModel)]="inputNumInt" [useGrouping]="true" styleClass="w-full" />
           </div>
           <div class="space-y-1">
-            <label class="text-xs text-[var(--muted-foreground)]">Decimal</label>
+            <label class="text-xs text-muted-foreground">Decimal</label>
             <p-inputnumber [(ngModel)]="inputNumDec" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="4" styleClass="w-full" />
           </div>
           <div class="space-y-1">
-            <label class="text-xs text-[var(--muted-foreground)]">Currency</label>
+            <label class="text-xs text-muted-foreground">Currency</label>
             <p-inputnumber [(ngModel)]="inputNumCur" mode="currency" currency="USD" locale="en-US" styleClass="w-full" />
           </div>
           <div class="space-y-1">
-            <label class="text-xs text-[var(--muted-foreground)]">Percentage</label>
+            <label class="text-xs text-muted-foreground">Percentage</label>
             <p-inputnumber [(ngModel)]="inputNumPct" suffix="%" [min]="0" [max]="100" styleClass="w-full" />
           </div>
         </div>
       </section>
 
       <!-- 16. Textarea -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Textarea</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Textarea</h2>
         <div class="max-w-sm space-y-1">
-          <label class="text-xs text-[var(--muted-foreground)]">Trade Notes</label>
+          <label class="text-xs text-muted-foreground">Trade Notes</label>
           <textarea pTextarea rows="3" placeholder="Enter notes for this trade..." class="w-full"></textarea>
         </div>
       </section>
 
       <!-- 17. Message -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Message</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Message</h2>
         <div class="space-y-2 max-w-lg">
           <p-message severity="info">Market data is delayed by 15 minutes.</p-message>
           <p-message severity="success">Order filled at 99.215.</p-message>
@@ -335,8 +335,8 @@ import { Popover } from 'primeng/popover';
       </section>
 
       <!-- 18. Table -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Table</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Table</h2>
         <p-table [value]="bonds" styleClass="p-datatable-sm p-datatable-gridlines">
           <ng-template pTemplate="header">
             <tr>
@@ -353,17 +353,17 @@ import { Popover } from 'primeng/popover';
               <td>{{ b.coupon }}</td>
               <td>{{ b.yield }}</td>
               <td>{{ b.price }}</td>
-              <td class="text-right" [ngClass]="b.chg.startsWith('+') ? 'text-[var(--negative)]' : 'text-[var(--positive)]'">{{ b.chg }}</td>
+              <td class="text-right" [ngClass]="b.chg.startsWith('+') ? 'text-negative' : 'text-positive'">{{ b.chg }}</td>
             </tr>
           </ng-template>
         </p-table>
       </section>
 
       <!-- 19. Slider -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Slider</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Slider</h2>
         <div class="max-w-xs space-y-2">
-          <div class="flex justify-between text-xs text-[var(--muted-foreground)]">
+          <div class="flex justify-between text-xs text-muted-foreground">
             <span>Volume</span>
             <span>{{ sliderValue() }}%</span>
           </div>
@@ -372,31 +372,31 @@ import { Popover } from 'primeng/popover';
       </section>
 
       <!-- 20. DatePicker -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">DatePicker</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">DatePicker</h2>
         <div class="max-w-xs space-y-1">
-          <label class="text-xs text-[var(--muted-foreground)]">Settlement Date</label>
+          <label class="text-xs text-muted-foreground">Settlement Date</label>
           <p-datepicker [(ngModel)]="dateValue" [showIcon]="true" styleClass="w-full" />
-          <p class="text-xs text-[var(--muted-foreground)]">Selected: {{ dateValue() ? dateValue()!.toLocaleDateString() : 'None' }}</p>
+          <p class="text-xs text-muted-foreground">Selected: {{ dateValue() ? dateValue()!.toLocaleDateString() : 'None' }}</p>
         </div>
       </section>
 
       <!-- 21. Drawer -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Drawer</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Drawer</h2>
         <p-button label="Open Side Panel" [outlined]="true" (click)="drawerVisible.set(true)" />
         <p-drawer header="Trade Details" [(visible)]="drawerVisible" position="right">
           <div class="space-y-3">
             <div class="space-y-1">
-              <label class="text-xs text-[var(--muted-foreground)]">Instrument</label>
+              <label class="text-xs text-muted-foreground">Instrument</label>
               <input pInputText value="US 10Y T-Note" class="w-full" />
             </div>
             <div class="space-y-1">
-              <label class="text-xs text-[var(--muted-foreground)]">Quantity</label>
+              <label class="text-xs text-muted-foreground">Quantity</label>
               <input pInputText type="number" value="5000000" class="w-full" />
             </div>
             <div class="space-y-1">
-              <label class="text-xs text-[var(--muted-foreground)]">Price</label>
+              <label class="text-xs text-muted-foreground">Price</label>
               <input pInputText type="number" value="99.215" class="w-full" />
             </div>
           </div>
@@ -404,49 +404,49 @@ import { Popover } from 'primeng/popover';
       </section>
 
       <!-- 22. Accordion -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Accordion</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Accordion</h2>
         <p-accordion [multiple]="false" class="max-w-sm block">
           <p-accordion-panel value="0">
             <p-accordion-header>Market Overview</p-accordion-header>
             <p-accordion-content>
-              <p class="text-xs text-[var(--muted-foreground)]">Treasury yields moved higher across the curve with the 10Y up 3bps.</p>
+              <p class="text-xs text-muted-foreground">Treasury yields moved higher across the curve with the 10Y up 3bps.</p>
             </p-accordion-content>
           </p-accordion-panel>
           <p-accordion-panel value="1">
             <p-accordion-header>Position Summary</p-accordion-header>
             <p-accordion-content>
-              <p class="text-xs text-[var(--muted-foreground)]">Net DV01: $12,500. Long duration bias with curve flattener.</p>
+              <p class="text-xs text-muted-foreground">Net DV01: $12,500. Long duration bias with curve flattener.</p>
             </p-accordion-content>
           </p-accordion-panel>
           <p-accordion-panel value="2">
             <p-accordion-header>Risk Limits</p-accordion-header>
             <p-accordion-content>
-              <p class="text-xs text-[var(--muted-foreground)]">Current utilization: 62%. Daily VaR: $45,000.</p>
+              <p class="text-xs text-muted-foreground">Current utilization: 62%. Daily VaR: $45,000.</p>
             </p-accordion-content>
           </p-accordion-panel>
         </p-accordion>
       </section>
 
       <!-- 23. Menu -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Menu</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Menu</h2>
         <p-menu [model]="menuItems" />
       </section>
 
       <!-- 24. Popover -->
-      <section class="rounded-lg border border-[var(--border)] bg-[var(--card)] p-4 space-y-3">
-        <h2 class="text-sm font-semibold text-[var(--foreground)] tracking-wide uppercase">Popover</h2>
+      <section class="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-foreground tracking-wide uppercase">Popover</h2>
         <p-button label="Open Popover" [outlined]="true" (click)="popover.toggle($event)" />
         <p-popover #popover>
           <div class="space-y-2 p-2" style="width: 240px">
-            <h4 class="text-xs font-medium text-[var(--foreground)]">Quick Settings</h4>
+            <h4 class="text-xs font-medium text-foreground">Quick Settings</h4>
             <div class="space-y-1">
-              <label class="text-[11px] text-[var(--muted-foreground)]">Default Lot Size</label>
+              <label class="text-[11px] text-muted-foreground">Default Lot Size</label>
               <input pInputText type="number" value="1000000" class="w-full text-xs" />
             </div>
             <div class="space-y-1">
-              <label class="text-[11px] text-[var(--muted-foreground)]">Slippage Tolerance</label>
+              <label class="text-[11px] text-muted-foreground">Slippage Tolerance</label>
               <input pInputText type="number" value="0.5" step="0.1" class="w-full text-xs" />
             </div>
           </div>
