@@ -2,6 +2,8 @@ import {
   Component,
   inject,
   computed,
+  signal,
+  effect,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HighchartsChartComponent } from 'highcharts-angular';
@@ -70,7 +72,10 @@ interface KpiCard {
             <div class="flex items-center justify-between py-1 border-b border-border last:border-b-0">
               <span class="text-[11px] text-muted-foreground font-medium">{{ bm.label }}</span>
               <div class="flex items-center gap-2">
-                <span class="text-[11px] font-mono font-semibold text-foreground tabular-nums">
+                <span
+                  class="text-[11px] font-mono font-semibold text-foreground tabular-nums"
+                  [ngClass]="benchmarkFlash()[bm.label] || ''"
+                >
                   {{ formatBenchmarkValue(bm) }}
                 </span>
                 <span
@@ -186,6 +191,36 @@ interface KpiCard {
 })
 export class DashboardPanelComponent {
   protected readonly mds = inject(MarketDataService);
+
+  /* ── Flash map for benchmark value changes ─────────────── */
+  readonly benchmarkFlash = signal<Record<string, string>>({});
+  private prevBenchmarkMids: Record<string, number> = {};
+  private benchmarkFlashTimers: Record<string, ReturnType<typeof setTimeout>> = {};
+
+  constructor() {
+    effect(() => {
+      const bms = this.mds.benchmarks();
+      const newFlash: Record<string, string> = { ...this.benchmarkFlash() };
+      for (const bm of bms) {
+        const prev = this.prevBenchmarkMids[bm.label];
+        if (prev != null && prev !== bm.value) {
+          newFlash[bm.label] = bm.value > prev
+            ? 'flash-positive tick-update'
+            : 'flash-negative tick-update';
+          if (this.benchmarkFlashTimers[bm.label]) clearTimeout(this.benchmarkFlashTimers[bm.label]);
+          this.benchmarkFlashTimers[bm.label] = setTimeout(() => {
+            this.benchmarkFlash.update((m) => {
+              const copy = { ...m };
+              delete copy[bm.label];
+              return copy;
+            });
+          }, 600);
+        }
+        this.prevBenchmarkMids[bm.label] = bm.value;
+      }
+      this.benchmarkFlash.set(newFlash);
+    });
+  }
 
   /* ── KPI Data ──────────────────────────────────────────── */
   readonly kpis: KpiCard[] = [
