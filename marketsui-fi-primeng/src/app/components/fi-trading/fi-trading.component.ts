@@ -8,6 +8,8 @@ import { FuturesPanelComponent } from './futures-panel/futures-panel.component';
 import { RiskPanelComponent } from './risk-panel/risk-panel.component';
 import { PositionsPanelComponent } from './positions-panel/positions-panel.component';
 import { BlotterPanelComponent } from './blotter-panel/blotter-panel.component';
+import { DesignSystemPanelComponent } from './design-system-panel/design-system-panel.component';
+import { ComponentsPanelComponent } from './components-panel/components-panel.component';
 import { MarketDataService } from '../../services/market-data.service';
 
 type FITab =
@@ -47,6 +49,8 @@ const TABS: FITab[] = [
     RiskPanelComponent,
     PositionsPanelComponent,
     BlotterPanelComponent,
+    DesignSystemPanelComponent,
+    ComponentsPanelComponent,
   ],
   template: `
     <div class="flex flex-col h-full bg-[var(--background)]">
@@ -105,10 +109,10 @@ const TABS: FITab[] = [
             </div>
           }
           @case ('Design System') {
-            <div class="flex items-center justify-center h-full text-[var(--muted-foreground)] text-sm">Design System (coming soon)</div>
+            <app-design-system-panel />
           }
           @case ('Components') {
-            <div class="flex items-center justify-center h-full text-[var(--muted-foreground)] text-sm">Components (coming soon)</div>
+            <app-components-panel />
           }
         }
       </div>
