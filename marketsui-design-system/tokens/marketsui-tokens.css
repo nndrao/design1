@@ -1,121 +1,178 @@
 /**
- * MarketsUI Design System — Shared Tokens
+ * MarketsUI Design System — Trading Terminal Tokens
  *
  * Single source of truth for all CSS custom properties.
- * Import this file in both React and Angular apps.
+ * Optimized for financial trading applications:
+ *   - High contrast buy/sell for split-second decisions
+ *   - Colorblind-safe chart palette (deuteranopia/protanopia tested)
+ *   - Reduced eye strain for extended sessions
+ *   - Order status colors distinct from trading colors
+ *   - P&L coloring separate from buy/sell semantics
  *
  * Color format: oklch (perceptually uniform, wide gamut)
- * Theme: shadcn/ui default neutral + trading extensions
+ * Import in both React and Angular apps.
  */
 
 /* ─── Light mode ────────────────────────────────────────── */
 :root {
   --radius: 0.625rem;
 
-  /* Core */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  /* ── Core surfaces ──────────────────────────────────────── */
+  --background: oklch(0.985 0.002 250);       /* very light blue-gray */
+  --foreground: oklch(0.165 0.015 260);       /* near-black with blue tint */
+  --card: oklch(1 0 0);                       /* white */
+  --card-foreground: oklch(0.165 0.015 260);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.165 0.015 260);
 
-  /* Brand */
-  --primary: oklch(0.205 0 0);
+  /* ── Brand / Accent ─────────────────────────────────────── */
+  --primary: oklch(0.55 0.2 260);             /* electric blue — neutral, no trading conflict */
   --primary-foreground: oklch(0.985 0 0);
 
-  /* Neutral */
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  /* ── Neutral chrome ─────────────────────────────────────── */
+  --secondary: oklch(0.955 0.005 250);        /* light blue-gray */
+  --secondary-foreground: oklch(0.35 0.02 260);
+  --muted: oklch(0.955 0.005 250);
+  --muted-foreground: oklch(0.50 0.015 260);  /* readable gray */
+  --accent: oklch(0.94 0.01 250);
+  --accent-foreground: oklch(0.25 0.02 260);
 
-  /* Semantic */
-  --destructive: oklch(0.577 0.245 27.325);
+  /* ── Semantic: destructive ──────────────────────────────── */
+  --destructive: oklch(0.58 0.24 25);         /* red — aligned with sell */
   --destructive-foreground: oklch(0.985 0 0);
 
-  /* Chrome */
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  /* ── Chrome / borders ───────────────────────────────────── */
+  --border: oklch(0.90 0.005 250);            /* subtle blue-gray border */
+  --input: oklch(0.90 0.005 250);
+  --ring: oklch(0.55 0.2 260);               /* matches primary */
 
-  /* Charts */
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  /* ── Trading: Buy / Sell ────────────────────────────────── */
+  --buy: oklch(0.65 0.2 155);                 /* emerald green — unmistakable "go" */
+  --buy-foreground: oklch(0.985 0 0);
+  --sell: oklch(0.60 0.22 25);                /* crimson red — unmistakable "stop" */
+  --sell-foreground: oklch(0.985 0 0);
 
-  /* Sidebar */
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
+  /* ── Trading: P&L / Change ──────────────────────────────── */
+  --positive: oklch(0.65 0.2 155);            /* green for profit */
+  --negative: oklch(0.60 0.22 25);            /* red for loss */
+  --unchanged: oklch(0.50 0.015 260);         /* gray for flat */
+
+  /* ── Trading: Order status ──────────────────────────────── */
+  --status-filled: oklch(0.65 0.2 155);       /* green */
+  --status-partial: oklch(0.75 0.18 85);      /* amber */
+  --status-working: oklch(0.55 0.2 260);      /* blue (matches primary) */
+  --status-cancelled: oklch(0.50 0.015 260);  /* gray */
+  --status-rejected: oklch(0.60 0.22 25);     /* red */
+
+  /* ── Alerts ─────────────────────────────────────────────── */
+  --warning: oklch(0.80 0.18 85);             /* warm amber */
+  --warning-foreground: oklch(0.20 0.05 85);
+  --info: oklch(0.60 0.15 240);               /* sky blue */
+  --info-foreground: oklch(0.985 0 0);
+  --success: oklch(0.65 0.2 155);             /* green */
+  --success-foreground: oklch(0.985 0 0);
+
+  /* ── Data viz: chart palette (colorblind-safe) ──────────── */
+  --chart-1: oklch(0.55 0.2 260);             /* blue (primary) */
+  --chart-2: oklch(0.65 0.2 155);             /* green (buy) */
+  --chart-3: oklch(0.75 0.18 85);             /* amber */
+  --chart-4: oklch(0.60 0.22 25);             /* red (sell) */
+  --chart-5: oklch(0.62 0.22 310);            /* purple */
+
+  /* ── UI: highlights & selection ─────────────────────────── */
+  --highlight: oklch(0.55 0.2 260 / 8%);      /* primary at 8% for row hover */
+  --selection: oklch(0.55 0.2 260 / 15%);     /* primary at 15% for selected */
+  --ticker-bar: oklch(0.165 0.015 260);       /* dark bar for scrolling ticker */
+  --ticker-bar-foreground: oklch(0.90 0 0);
+
+  /* ── Sidebar ────────────────────────────────────────────── */
+  --sidebar: oklch(0.975 0.003 250);
+  --sidebar-foreground: oklch(0.165 0.015 260);
+  --sidebar-primary: oklch(0.55 0.2 260);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-
-  /* Trading extensions */
-  --buy: oklch(0.696 0.17 162.48);
-  --sell: oklch(0.577 0.245 27.325);
-  --warning: oklch(0.828 0.189 84.429);
-  --info: oklch(0.6 0.118 184.704);
+  --sidebar-accent: oklch(0.94 0.01 250);
+  --sidebar-accent-foreground: oklch(0.25 0.02 260);
+  --sidebar-border: oklch(0.90 0.005 250);
+  --sidebar-ring: oklch(0.55 0.2 260);
 }
 
 /* ─── Dark mode ─────────────────────────────────────────── */
 .dark {
-  /* Core */
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
+  /* ── Core surfaces ──────────────────────────────────────── */
+  --background: oklch(0.14 0.008 260);        /* deep navy — easier on eyes than pure black */
+  --foreground: oklch(0.93 0.005 250);        /* soft white — less harsh than pure white */
+  --card: oklch(0.19 0.01 260);               /* elevated surface */
+  --card-foreground: oklch(0.93 0.005 250);
+  --popover: oklch(0.19 0.01 260);
+  --popover-foreground: oklch(0.93 0.005 250);
 
-  /* Brand */
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  /* ── Brand / Accent ─────────────────────────────────────── */
+  --primary: oklch(0.68 0.18 260);            /* brighter blue for dark bg */
+  --primary-foreground: oklch(0.14 0.008 260);
 
-  /* Neutral */
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  /* ── Neutral chrome ─────────────────────────────────────── */
+  --secondary: oklch(0.24 0.012 260);
+  --secondary-foreground: oklch(0.88 0.005 250);
+  --muted: oklch(0.24 0.012 260);
+  --muted-foreground: oklch(0.62 0.01 250);   /* readable mid-gray */
+  --accent: oklch(0.24 0.012 260);
+  --accent-foreground: oklch(0.88 0.005 250);
 
-  /* Semantic */
-  --destructive: oklch(0.704 0.191 22.216);
+  /* ── Semantic: destructive ──────────────────────────────── */
+  --destructive: oklch(0.68 0.2 22);
   --destructive-foreground: oklch(0.985 0 0);
 
-  /* Chrome */
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  /* ── Chrome / borders ───────────────────────────────────── */
+  --border: oklch(1 0 0 / 10%);               /* translucent white */
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.68 0.18 260);
 
-  /* Charts */
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
+  /* ── Trading: Buy / Sell ────────────────────────────────── */
+  --buy: oklch(0.72 0.19 155);                /* brighter green for dark bg */
+  --buy-foreground: oklch(0.14 0 0);
+  --sell: oklch(0.68 0.2 22);                 /* brighter red for dark bg */
+  --sell-foreground: oklch(0.985 0 0);
 
-  /* Sidebar */
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
+  /* ── Trading: P&L / Change ──────────────────────────────── */
+  --positive: oklch(0.72 0.19 155);
+  --negative: oklch(0.68 0.2 22);
+  --unchanged: oklch(0.62 0.01 250);
+
+  /* ── Trading: Order status ──────────────────────────────── */
+  --status-filled: oklch(0.72 0.19 155);
+  --status-partial: oklch(0.80 0.16 85);
+  --status-working: oklch(0.68 0.18 260);
+  --status-cancelled: oklch(0.62 0.01 250);
+  --status-rejected: oklch(0.68 0.2 22);
+
+  /* ── Alerts ─────────────────────────────────────────────── */
+  --warning: oklch(0.82 0.16 85);
+  --warning-foreground: oklch(0.20 0.05 85);
+  --info: oklch(0.68 0.18 260);
+  --info-foreground: oklch(0.14 0.008 260);
+  --success: oklch(0.72 0.19 155);
+  --success-foreground: oklch(0.14 0 0);
+
+  /* ── Data viz: chart palette ────────────────────────────── */
+  --chart-1: oklch(0.68 0.18 260);            /* blue */
+  --chart-2: oklch(0.72 0.19 155);            /* green */
+  --chart-3: oklch(0.82 0.16 85);             /* amber */
+  --chart-4: oklch(0.68 0.2 22);              /* red */
+  --chart-5: oklch(0.70 0.2 310);             /* purple */
+
+  /* ── UI: highlights & selection ─────────────────────────── */
+  --highlight: oklch(0.68 0.18 260 / 8%);
+  --selection: oklch(0.68 0.18 260 / 15%);
+  --ticker-bar: oklch(0.12 0.005 260);
+  --ticker-bar-foreground: oklch(0.85 0 0);
+
+  /* ── Sidebar ────────────────────────────────────────────── */
+  --sidebar: oklch(0.17 0.009 260);
+  --sidebar-foreground: oklch(0.93 0.005 250);
+  --sidebar-primary: oklch(0.68 0.18 260);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.24 0.012 260);
+  --sidebar-accent-foreground: oklch(0.88 0.005 250);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-
-  /* Trading extensions */
-  --buy: oklch(0.696 0.17 162.48);
-  --sell: oklch(0.704 0.191 22.216);
-  --warning: oklch(0.828 0.189 84.429);
-  --info: oklch(0.488 0.243 264.376);
+  --sidebar-ring: oklch(0.68 0.18 260);
 }

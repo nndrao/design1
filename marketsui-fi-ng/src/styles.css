@@ -34,22 +34,56 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-buy: var(--buy);
-  --color-sell: var(--sell);
-  --color-warning: var(--warning);
-  --color-info: var(--info);
-  --color-surface: var(--surface);
-  --color-elevated: var(--elevated);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 8px);
-  --radius-md: calc(var(--radius) - 4px);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+
+  /* Trading */
+  --color-buy: var(--buy);
+  --color-buy-foreground: var(--buy-foreground);
+  --color-sell: var(--sell);
+  --color-sell-foreground: var(--sell-foreground);
+  --color-positive: var(--positive);
+  --color-negative: var(--negative);
+  --color-unchanged: var(--unchanged);
+
+  /* Order status */
+  --color-status-filled: var(--status-filled);
+  --color-status-partial: var(--status-partial);
+  --color-status-working: var(--status-working);
+  --color-status-cancelled: var(--status-cancelled);
+  --color-status-rejected: var(--status-rejected);
+
+  /* Alerts */
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+
+  /* UI */
+  --color-highlight: var(--highlight);
+  --color-selection: var(--selection);
+  --color-ticker-bar: var(--ticker-bar);
+  --color-ticker-bar-foreground: var(--ticker-bar-foreground);
+
+  /* Sidebar */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
 }

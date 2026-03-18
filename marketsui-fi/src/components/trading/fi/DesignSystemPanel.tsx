@@ -1,42 +1,131 @@
 import React from "react";
 
-const colorTokens = [
-  // Core
-  { token: "--background", light: "#E8E8E8", dark: "#000000", description: "Page background" },
-  { token: "--foreground", light: "#1A1A1A", dark: "#FFFFFF", description: "Default text color" },
-  { token: "--card", light: "#F0F0F0", dark: "#1A1D21", description: "Card surface" },
-  { token: "--card-foreground", light: "#1A1A1A", dark: "#FFFFFF", description: "Card text color" },
-  { token: "--popover", light: "#F0F0F0", dark: "#1A1D21", description: "Popover surface" },
-  { token: "--popover-foreground", light: "#1A1A1A", dark: "#FFFFFF", description: "Popover text color" },
-  // Brand
-  { token: "--primary", light: "#60A5FA", dark: "#60A5FA", description: "Primary brand color" },
-  { token: "--primary-foreground", light: "#FFFFFF", dark: "#000000", description: "Text on primary" },
-  // Neutral
-  { token: "--secondary", light: "#DCDCDC", dark: "#1E2124", description: "Secondary surfaces" },
-  { token: "--secondary-foreground", light: "#1A1A1A", dark: "#FFFFFF", description: "Text on secondary" },
-  { token: "--muted", light: "#DCDCDC", dark: "#1E2124", description: "Muted backgrounds" },
-  { token: "--muted-foreground", light: "#5F6368", dark: "#9DA0A5", description: "Muted / subtle text" },
-  { token: "--accent", light: "#DCDCDC", dark: "#1E2124", description: "Accent highlights" },
-  { token: "--accent-foreground", light: "#1A1A1A", dark: "#FFFFFF", description: "Text on accent" },
-  // Semantic
-  { token: "--destructive", light: "#FF5252", dark: "#FF5252", description: "Error / destructive" },
-  { token: "--destructive-foreground", light: "#FFFFFF", dark: "#FFFFFF", description: "Text on destructive" },
-  { token: "--buy", light: "#14B8A6", dark: "#14B8A6", description: "Buy / positive action" },
-  { token: "--sell", light: "#FF5252", dark: "#FF5252", description: "Sell / negative action" },
-  { token: "--warning", light: "#FF9800", dark: "#FF9800", description: "Warning state" },
-  { token: "--info", light: "#5B93D5", dark: "#5B93D5", description: "Informational state" },
-  // Chrome
-  { token: "--border", light: "#CCCCCC", dark: "#2C2F33", description: "Default borders" },
-  { token: "--input", light: "#CCCCCC", dark: "#2C2F33", description: "Input borders" },
-  { token: "--ring", light: "#60A5FA", dark: "#60A5FA", description: "Focus ring color" },
-  { token: "--surface", light: "#F0F0F0", dark: "#1A1D21", description: "Elevated surface" },
-  { token: "--elevated", light: "#FFFFFF", dark: "#23272B", description: "Highest elevation" },
-  // Charts
-  { token: "--chart-1", light: "#60A5FA", dark: "#60A5FA", description: "Chart series 1" },
-  { token: "--chart-2", light: "#FF5252", dark: "#FF5252", description: "Chart series 2" },
-  { token: "--chart-3", light: "#5B93D5", dark: "#5B93D5", description: "Chart series 3" },
-  { token: "--chart-4", light: "#FF9800", dark: "#FF9800", description: "Chart series 4" },
-  { token: "--chart-5", light: "#9C27B0", dark: "#9C27B0", description: "Chart series 5" },
+interface ColorToken {
+  token: string;
+  tailwind: string;
+  description: string;
+}
+
+interface ColorGroup {
+  label: string;
+  tokens: ColorToken[];
+}
+
+const colorGroups: ColorGroup[] = [
+  {
+    label: "Core Surfaces",
+    tokens: [
+      { token: "--background", tailwind: "bg-background", description: "Page / app background" },
+      { token: "--foreground", tailwind: "text-foreground", description: "Primary text color" },
+      { token: "--card", tailwind: "bg-card", description: "Card / panel background" },
+      { token: "--card-foreground", tailwind: "text-card-foreground", description: "Text on cards" },
+      { token: "--popover", tailwind: "bg-popover", description: "Popover / dropdown background" },
+      { token: "--popover-foreground", tailwind: "text-popover-foreground", description: "Text inside popovers" },
+    ],
+  },
+  {
+    label: "Brand",
+    tokens: [
+      { token: "--primary", tailwind: "bg-primary", description: "Primary brand / interactive color" },
+      { token: "--primary-foreground", tailwind: "text-primary-foreground", description: "Text on primary backgrounds" },
+    ],
+  },
+  {
+    label: "Neutral",
+    tokens: [
+      { token: "--secondary", tailwind: "bg-secondary", description: "Secondary surfaces" },
+      { token: "--secondary-foreground", tailwind: "text-secondary-foreground", description: "Text on secondary" },
+      { token: "--muted", tailwind: "bg-muted", description: "Muted / subtle backgrounds" },
+      { token: "--muted-foreground", tailwind: "text-muted-foreground", description: "De-emphasized text" },
+      { token: "--accent", tailwind: "bg-accent", description: "Accent highlights" },
+      { token: "--accent-foreground", tailwind: "text-accent-foreground", description: "Text on accent" },
+    ],
+  },
+  {
+    label: "Semantic",
+    tokens: [
+      { token: "--destructive", tailwind: "bg-destructive", description: "Error / destructive actions" },
+      { token: "--destructive-foreground", tailwind: "text-destructive-foreground", description: "Text on destructive" },
+    ],
+  },
+  {
+    label: "Chrome",
+    tokens: [
+      { token: "--border", tailwind: "border-border", description: "Borders and dividers" },
+      { token: "--input", tailwind: "border-input", description: "Input field borders" },
+      { token: "--ring", tailwind: "ring-ring", description: "Focus ring color" },
+    ],
+  },
+  {
+    label: "Trading: Buy/Sell",
+    tokens: [
+      { token: "--buy", tailwind: "bg-buy", description: "Buy action background" },
+      { token: "--buy-foreground", tailwind: "text-buy-foreground", description: "Text on buy background" },
+      { token: "--sell", tailwind: "bg-sell", description: "Sell action background" },
+      { token: "--sell-foreground", tailwind: "text-sell-foreground", description: "Text on sell background" },
+    ],
+  },
+  {
+    label: "Trading: P&L",
+    tokens: [
+      { token: "--positive", tailwind: "text-positive", description: "Profit / positive change" },
+      { token: "--negative", tailwind: "text-negative", description: "Loss / negative change" },
+      { token: "--unchanged", tailwind: "text-unchanged", description: "Flat / no change" },
+    ],
+  },
+  {
+    label: "Trading: Order Status",
+    tokens: [
+      { token: "--status-filled", tailwind: "text-status-filled", description: "Fully filled orders" },
+      { token: "--status-partial", tailwind: "text-status-partial", description: "Partially filled orders" },
+      { token: "--status-working", tailwind: "text-status-working", description: "Working / open orders" },
+      { token: "--status-cancelled", tailwind: "text-status-cancelled", description: "Cancelled orders" },
+      { token: "--status-rejected", tailwind: "text-status-rejected", description: "Rejected orders" },
+    ],
+  },
+  {
+    label: "Alerts",
+    tokens: [
+      { token: "--warning", tailwind: "bg-warning", description: "Warning / caution state" },
+      { token: "--warning-foreground", tailwind: "text-warning-foreground", description: "Text on warning" },
+      { token: "--info", tailwind: "bg-info", description: "Informational state" },
+      { token: "--info-foreground", tailwind: "text-info-foreground", description: "Text on info" },
+      { token: "--success", tailwind: "bg-success", description: "Success state" },
+      { token: "--success-foreground", tailwind: "text-success-foreground", description: "Text on success" },
+    ],
+  },
+  {
+    label: "Charts",
+    tokens: [
+      { token: "--chart-1", tailwind: "bg-chart-1", description: "Chart series 1 (blue)" },
+      { token: "--chart-2", tailwind: "bg-chart-2", description: "Chart series 2 (green)" },
+      { token: "--chart-3", tailwind: "bg-chart-3", description: "Chart series 3 (amber)" },
+      { token: "--chart-4", tailwind: "bg-chart-4", description: "Chart series 4 (red)" },
+      { token: "--chart-5", tailwind: "bg-chart-5", description: "Chart series 5 (purple)" },
+    ],
+  },
+  {
+    label: "UI",
+    tokens: [
+      { token: "--highlight", tailwind: "bg-highlight", description: "Row hover highlight" },
+      { token: "--selection", tailwind: "bg-selection", description: "Selected row / item" },
+      { token: "--ticker-bar", tailwind: "bg-ticker-bar", description: "Scrolling ticker bar background" },
+      { token: "--ticker-bar-foreground", tailwind: "text-ticker-bar-foreground", description: "Ticker bar text" },
+    ],
+  },
+  {
+    label: "Sidebar",
+    tokens: [
+      { token: "--sidebar", tailwind: "bg-sidebar", description: "Sidebar background" },
+      { token: "--sidebar-foreground", tailwind: "text-sidebar-foreground", description: "Sidebar text" },
+      { token: "--sidebar-primary", tailwind: "bg-sidebar-primary", description: "Sidebar primary accent" },
+      { token: "--sidebar-primary-foreground", tailwind: "text-sidebar-primary-foreground", description: "Text on sidebar primary" },
+      { token: "--sidebar-accent", tailwind: "bg-sidebar-accent", description: "Sidebar accent background" },
+      { token: "--sidebar-accent-foreground", tailwind: "text-sidebar-accent-foreground", description: "Text on sidebar accent" },
+      { token: "--sidebar-border", tailwind: "border-sidebar-border", description: "Sidebar border color" },
+      { token: "--sidebar-ring", tailwind: "ring-sidebar-ring", description: "Sidebar focus ring" },
+    ],
+  },
 ];
 
 const typeSizes = [
@@ -100,7 +189,7 @@ function SectionCard({
   );
 }
 
-function ColorGroup({ label, tokens }: { label: string; tokens: typeof colorTokens }) {
+function ColorGroupRows({ group }: { group: ColorGroup }) {
   return (
     <>
       <tr>
@@ -108,25 +197,25 @@ function ColorGroup({ label, tokens }: { label: string; tokens: typeof colorToke
           colSpan={5}
           className="pt-4 pb-1 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
         >
-          {label}
+          {group.label}
         </td>
       </tr>
-      {tokens.map((t) => (
+      {group.tokens.map((t) => (
         <tr key={t.token} className="border-t border-border/50">
           <td className="px-3 py-2">
             <div
               className="w-8 h-8 rounded-md border border-border"
-              style={{ backgroundColor: `var(${t.token})` }}
+              style={{ background: `var(${t.token})` }}
             />
           </td>
           <td className="px-3 py-2 font-mono text-xs text-foreground">
+            {t.token}
+          </td>
+          <td className="px-3 py-2 font-mono text-xs text-muted-foreground">
             var({t.token})
           </td>
           <td className="px-3 py-2 font-mono text-xs text-muted-foreground">
-            {t.light}
-          </td>
-          <td className="px-3 py-2 font-mono text-xs text-muted-foreground">
-            {t.dark}
+            {t.tailwind}
           </td>
           <td className="px-3 py-2 text-sm text-muted-foreground">
             {t.description}
@@ -138,23 +227,6 @@ function ColorGroup({ label, tokens }: { label: string; tokens: typeof colorToke
 }
 
 export function DesignSystemPanel() {
-  const coreTokens = colorTokens.filter((t) =>
-    ["--background", "--foreground", "--card", "--card-foreground", "--popover", "--popover-foreground"].includes(t.token)
-  );
-  const brandTokens = colorTokens.filter((t) =>
-    ["--primary", "--primary-foreground"].includes(t.token)
-  );
-  const neutralTokens = colorTokens.filter((t) =>
-    ["--secondary", "--secondary-foreground", "--muted", "--muted-foreground", "--accent", "--accent-foreground"].includes(t.token)
-  );
-  const semanticTokens = colorTokens.filter((t) =>
-    ["--destructive", "--destructive-foreground", "--buy", "--sell", "--warning", "--info"].includes(t.token)
-  );
-  const chromeTokens = colorTokens.filter((t) =>
-    ["--border", "--input", "--ring", "--surface", "--elevated"].includes(t.token)
-  );
-  const chartTokens = colorTokens.filter((t) => t.token.startsWith("--chart-"));
-
   return (
     <div className="h-full overflow-y-auto p-4 space-y-6 bg-background">
       <h1 className="text-2xl font-bold text-foreground">Design System</h1>
@@ -172,10 +244,10 @@ export function DesignSystemPanel() {
                   Token
                 </th>
                 <th className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  Light
+                  CSS Variable
                 </th>
                 <th className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  Dark
+                  Tailwind
                 </th>
                 <th className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                   Description
@@ -183,12 +255,9 @@ export function DesignSystemPanel() {
               </tr>
             </thead>
             <tbody>
-              <ColorGroup label="Core" tokens={coreTokens} />
-              <ColorGroup label="Brand" tokens={brandTokens} />
-              <ColorGroup label="Neutral" tokens={neutralTokens} />
-              <ColorGroup label="Semantic" tokens={semanticTokens} />
-              <ColorGroup label="Chrome" tokens={chromeTokens} />
-              <ColorGroup label="Charts" tokens={chartTokens} />
+              {colorGroups.map((g) => (
+                <ColorGroupRows key={g.label} group={g} />
+              ))}
             </tbody>
           </table>
         </div>

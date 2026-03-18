@@ -5,8 +5,7 @@ import {
 
 interface ColorToken {
   name: string;
-  lightHex: string;
-  darkHex: string;
+  tailwind: string;
   description: string;
 }
 
@@ -42,8 +41,8 @@ interface ColorToken {
                 <tr class="border-b border-border text-left text-muted-foreground">
                   <th class="py-2 pr-3 w-12">Swatch</th>
                   <th class="py-2 pr-3">Token</th>
-                  <th class="py-2 pr-3">Light</th>
-                  <th class="py-2 pr-3">Dark</th>
+                  <th class="py-2 pr-3">CSS Variable</th>
+                  <th class="py-2 pr-3">Tailwind</th>
                   <th class="py-2">Description</th>
                 </tr>
               </thead>
@@ -57,8 +56,8 @@ interface ColorToken {
                       ></div>
                     </td>
                     <td class="py-2 pr-3 font-mono text-foreground">--{{ token.name }}</td>
-                    <td class="py-2 pr-3 font-mono text-muted-foreground">{{ token.lightHex }}</td>
-                    <td class="py-2 pr-3 font-mono text-muted-foreground">{{ token.darkHex }}</td>
+                    <td class="py-2 pr-3 font-mono text-muted-foreground">var(--{{ token.name }})</td>
+                    <td class="py-2 pr-3 font-mono text-muted-foreground">{{ token.tailwind }}</td>
                     <td class="py-2 text-muted-foreground">{{ token.description }}</td>
                   </tr>
                 }
@@ -215,57 +214,117 @@ export class DesignSystemPanelComponent {
   /* ── Color Tokens ────────────────────────────────────── */
   readonly colorGroups: { label: string; tokens: ColorToken[] }[] = [
     {
-      label: 'Core',
+      label: 'Core Surfaces',
       tokens: [
-        { name: 'background',        lightHex: '#E8E8E8', darkHex: '#000000', description: 'Page / app background' },
-        { name: 'foreground',         lightHex: '#1A1A1A', darkHex: '#FFFFFF', description: 'Primary text color' },
-        { name: 'card',              lightHex: '#F0F0F0', darkHex: '#1A1D21', description: 'Card / panel background' },
-        { name: 'card-foreground',   lightHex: '#1A1A1A', darkHex: '#FFFFFF', description: 'Text on cards' },
+        { name: 'background',          tailwind: 'bg-background',          description: 'Page / app background' },
+        { name: 'foreground',           tailwind: 'text-foreground',        description: 'Primary text color' },
+        { name: 'card',                 tailwind: 'bg-card',                description: 'Card / panel background' },
+        { name: 'card-foreground',      tailwind: 'text-card-foreground',   description: 'Text on cards' },
+        { name: 'popover',              tailwind: 'bg-popover',             description: 'Popover / dropdown background' },
+        { name: 'popover-foreground',   tailwind: 'text-popover-foreground', description: 'Text inside popovers' },
       ],
     },
     {
       label: 'Brand',
       tokens: [
-        { name: 'primary',           lightHex: '#60A5FA', darkHex: '#60A5FA', description: 'Primary accent / interactive color' },
-        { name: 'primary-foreground', lightHex: '#FFFFFF', darkHex: '#FFFFFF', description: 'Text on primary backgrounds' },
+        { name: 'primary',             tailwind: 'bg-primary',             description: 'Primary brand / interactive color' },
+        { name: 'primary-foreground',   tailwind: 'text-primary-foreground', description: 'Text on primary backgrounds' },
       ],
     },
     {
       label: 'Neutral',
       tokens: [
-        { name: 'secondary',         lightHex: '#DCDCDC', darkHex: '#1E2124', description: 'Secondary backgrounds' },
-        { name: 'muted',             lightHex: '#D4D4D4', darkHex: '#2C2F33', description: 'Muted / subtle backgrounds' },
-        { name: 'muted-foreground',  lightHex: '#5F6368', darkHex: '#9DA0A5', description: 'De-emphasized text' },
+        { name: 'secondary',           tailwind: 'bg-secondary',           description: 'Secondary surfaces' },
+        { name: 'secondary-foreground', tailwind: 'text-secondary-foreground', description: 'Text on secondary' },
+        { name: 'muted',               tailwind: 'bg-muted',               description: 'Muted / subtle backgrounds' },
+        { name: 'muted-foreground',     tailwind: 'text-muted-foreground',  description: 'De-emphasized text' },
+        { name: 'accent',              tailwind: 'bg-accent',              description: 'Accent highlights' },
+        { name: 'accent-foreground',    tailwind: 'text-accent-foreground', description: 'Text on accent' },
       ],
     },
     {
       label: 'Semantic',
       tokens: [
-        { name: 'destructive',       lightHex: '#FF5252', darkHex: '#FF5252', description: 'Destructive / error actions' },
-        { name: 'buy',               lightHex: '#14B8A6', darkHex: '#14B8A6', description: 'Buy / positive / teal' },
-        { name: 'sell',              lightHex: '#FF5252', darkHex: '#FF5252', description: 'Sell / negative / red' },
-        { name: 'warning',           lightHex: '#FF9800', darkHex: '#FF9800', description: 'Warning / caution' },
-        { name: 'info',              lightHex: '#5B93D5', darkHex: '#5B93D5', description: 'Informational highlights' },
+        { name: 'destructive',          tailwind: 'bg-destructive',         description: 'Error / destructive actions' },
+        { name: 'destructive-foreground', tailwind: 'text-destructive-foreground', description: 'Text on destructive' },
       ],
     },
     {
       label: 'Chrome',
       tokens: [
-        { name: 'border',            lightHex: '#CCCCCC', darkHex: '#2C2F33', description: 'Borders and dividers' },
-        { name: 'input',             lightHex: '#E0E0E0', darkHex: '#2C2F33', description: 'Input field borders' },
-        { name: 'ring',              lightHex: '#60A5FA', darkHex: '#60A5FA', description: 'Focus ring color' },
-        { name: 'surface',           lightHex: '#F5F5F5', darkHex: '#15171A', description: 'Elevated surface background' },
-        { name: 'elevated',          lightHex: '#FAFAFA', darkHex: '#1E2124', description: 'Popover / dropdown background' },
+        { name: 'border',              tailwind: 'border-border',          description: 'Borders and dividers' },
+        { name: 'input',               tailwind: 'border-input',           description: 'Input field borders' },
+        { name: 'ring',                tailwind: 'ring-ring',              description: 'Focus ring color' },
+      ],
+    },
+    {
+      label: 'Trading: Buy/Sell',
+      tokens: [
+        { name: 'buy',                 tailwind: 'bg-buy',                 description: 'Buy action background' },
+        { name: 'buy-foreground',       tailwind: 'text-buy-foreground',    description: 'Text on buy background' },
+        { name: 'sell',                tailwind: 'bg-sell',                description: 'Sell action background' },
+        { name: 'sell-foreground',      tailwind: 'text-sell-foreground',   description: 'Text on sell background' },
+      ],
+    },
+    {
+      label: 'Trading: P&L',
+      tokens: [
+        { name: 'positive',            tailwind: 'text-positive',          description: 'Profit / positive change' },
+        { name: 'negative',            tailwind: 'text-negative',          description: 'Loss / negative change' },
+        { name: 'unchanged',           tailwind: 'text-unchanged',         description: 'Flat / no change' },
+      ],
+    },
+    {
+      label: 'Trading: Order Status',
+      tokens: [
+        { name: 'status-filled',       tailwind: 'text-status-filled',     description: 'Fully filled orders' },
+        { name: 'status-partial',       tailwind: 'text-status-partial',    description: 'Partially filled orders' },
+        { name: 'status-working',       tailwind: 'text-status-working',    description: 'Working / open orders' },
+        { name: 'status-cancelled',     tailwind: 'text-status-cancelled',  description: 'Cancelled orders' },
+        { name: 'status-rejected',      tailwind: 'text-status-rejected',   description: 'Rejected orders' },
+      ],
+    },
+    {
+      label: 'Alerts',
+      tokens: [
+        { name: 'warning',             tailwind: 'bg-warning',             description: 'Warning / caution state' },
+        { name: 'warning-foreground',   tailwind: 'text-warning-foreground', description: 'Text on warning' },
+        { name: 'info',                tailwind: 'bg-info',                description: 'Informational state' },
+        { name: 'info-foreground',      tailwind: 'text-info-foreground',   description: 'Text on info' },
+        { name: 'success',             tailwind: 'bg-success',             description: 'Success state' },
+        { name: 'success-foreground',   tailwind: 'text-success-foreground', description: 'Text on success' },
       ],
     },
     {
       label: 'Charts',
       tokens: [
-        { name: 'chart-1',           lightHex: '#60A5FA', darkHex: '#60A5FA', description: 'Chart series 1 (blue)' },
-        { name: 'chart-2',           lightHex: '#FF5252', darkHex: '#FF5252', description: 'Chart series 2 (red)' },
-        { name: 'chart-3',           lightHex: '#5B93D5', darkHex: '#5B93D5', description: 'Chart series 3 (steel blue)' },
-        { name: 'chart-4',           lightHex: '#FF9800', darkHex: '#FF9800', description: 'Chart series 4 (orange)' },
-        { name: 'chart-5',           lightHex: '#9C27B0', darkHex: '#9C27B0', description: 'Chart series 5 (purple)' },
+        { name: 'chart-1',             tailwind: 'bg-chart-1',             description: 'Chart series 1 (blue)' },
+        { name: 'chart-2',             tailwind: 'bg-chart-2',             description: 'Chart series 2 (green)' },
+        { name: 'chart-3',             tailwind: 'bg-chart-3',             description: 'Chart series 3 (amber)' },
+        { name: 'chart-4',             tailwind: 'bg-chart-4',             description: 'Chart series 4 (red)' },
+        { name: 'chart-5',             tailwind: 'bg-chart-5',             description: 'Chart series 5 (purple)' },
+      ],
+    },
+    {
+      label: 'UI',
+      tokens: [
+        { name: 'highlight',           tailwind: 'bg-highlight',           description: 'Row hover highlight' },
+        { name: 'selection',            tailwind: 'bg-selection',           description: 'Selected row / item' },
+        { name: 'ticker-bar',          tailwind: 'bg-ticker-bar',          description: 'Scrolling ticker bar background' },
+        { name: 'ticker-bar-foreground', tailwind: 'text-ticker-bar-foreground', description: 'Ticker bar text' },
+      ],
+    },
+    {
+      label: 'Sidebar',
+      tokens: [
+        { name: 'sidebar',                     tailwind: 'bg-sidebar',                     description: 'Sidebar background' },
+        { name: 'sidebar-foreground',           tailwind: 'text-sidebar-foreground',        description: 'Sidebar text' },
+        { name: 'sidebar-primary',              tailwind: 'bg-sidebar-primary',             description: 'Sidebar primary accent' },
+        { name: 'sidebar-primary-foreground',   tailwind: 'text-sidebar-primary-foreground', description: 'Text on sidebar primary' },
+        { name: 'sidebar-accent',               tailwind: 'bg-sidebar-accent',              description: 'Sidebar accent background' },
+        { name: 'sidebar-accent-foreground',     tailwind: 'text-sidebar-accent-foreground', description: 'Text on sidebar accent' },
+        { name: 'sidebar-border',               tailwind: 'border-sidebar-border',          description: 'Sidebar border color' },
+        { name: 'sidebar-ring',                 tailwind: 'ring-sidebar-ring',              description: 'Sidebar focus ring' },
       ],
     },
   ];
