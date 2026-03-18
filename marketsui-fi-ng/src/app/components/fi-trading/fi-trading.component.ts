@@ -6,6 +6,7 @@ import {
   computed,
   inject,
   effect,
+  HostListener,
 } from '@angular/core';
 
 import { NgClass } from '@angular/common';
@@ -193,6 +194,33 @@ const TABS: FITab[] = [
           }
         }
       </div>
+
+      <!-- Keyboard Shortcuts Overlay -->
+      @if (showShortcuts()) {
+        <div
+          class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+          (click)="showShortcuts.set(false)"
+        >
+          <div
+            class="bg-card border border-border rounded-xl shadow-2xl p-6 w-[360px] max-w-[90vw]"
+            (click)="$event.stopPropagation()"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-sm font-semibold text-foreground">Keyboard Shortcuts</h2>
+              <button
+                class="text-muted-foreground hover:text-foreground text-xs"
+                (click)="showShortcuts.set(false)"
+              >Esc</button>
+            </div>
+            <div class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2">
+              @for (s of shortcuts; track s.key) {
+                <kbd class="inline-flex items-center justify-center rounded-md border border-border bg-secondary px-2 py-0.5 text-[11px] font-mono font-semibold text-foreground min-w-[28px] text-center">{{ s.key }}</kbd>
+                <span class="text-[12px] text-muted-foreground flex items-center">{{ s.desc }}</span>
+              }
+            </div>
+          </div>
+        </div>
+      }
     </div>
   `,
 })
@@ -202,6 +230,45 @@ export class FiTradingComponent implements OnInit, OnDestroy {
 
   readonly tabs = TABS;
   readonly activeTab = signal<FITab>('Overview');
+
+  /* ── Keyboard shortcuts overlay ─────────────────────────── */
+  readonly showShortcuts = signal(false);
+
+  readonly shortcuts = [
+    { key: '1-9', desc: 'Switch tabs' },
+    { key: 'N', desc: 'New order (Order Blotter)' },
+    { key: '?', desc: 'Show this overlay' },
+    { key: 'L', desc: 'Toggle light / dark' },
+    { key: 'Esc', desc: 'Close overlay' },
+  ];
+
+  @HostListener('document:keydown', ['$event'])
+  onKeydown(e: KeyboardEvent): void {
+    const tag = (e.target as HTMLElement)?.tagName?.toLowerCase();
+    if (tag === 'input' || tag === 'select' || tag === 'textarea') return;
+
+    if (e.key === '?' || (e.key === '/' && e.shiftKey)) {
+      e.preventDefault();
+      this.showShortcuts.update((v) => !v);
+      return;
+    }
+    if (e.key === 'Escape') {
+      this.showShortcuts.set(false);
+      return;
+    }
+    if (e.key.toLowerCase() === 'l') {
+      this.themeService.toggleTheme();
+      return;
+    }
+    if (e.key.toLowerCase() === 'n') {
+      this.activeTab.set('Order Blotter');
+      return;
+    }
+    const num = parseInt(e.key, 10);
+    if (num >= 1 && num <= TABS.length) {
+      this.activeTab.set(TABS[num - 1]);
+    }
+  }
 
   /* ── Market time ──────────────────────────────────────────── */
   readonly etString = signal('');

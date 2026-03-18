@@ -163,6 +163,14 @@
   animation: tick-update 0.3s ease-out;
 }
 
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); filter: blur(2px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+.animate-count-up {
+  animation: count-up 0.5s ease-out forwards;
+}
+
 /* ─── Angular component host full height ────────────────── */
 app-root { display: flex; flex-direction: column; height: 100vh; }
 app-fi-trading { display: flex; flex-direction: column; flex: 1; min-height: 0; }

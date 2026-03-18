@@ -29,18 +29,37 @@ interface KpiCard {
       <!-- ── KPI Row ─────────────────────────────────────── -->
       <div class="col-span-12 grid grid-cols-5 gap-3">
         @for (kpi of kpis; track kpi.label) {
-          <div class="bg-card rounded-lg border border-border px-4 py-3 flex flex-col gap-0.5">
+          <div
+            class="bg-card rounded-lg border border-border px-4 py-3 flex flex-col gap-0.5 cursor-pointer transition-all duration-200 hover:border-primary/40"
+            (click)="toggleKpi(kpi.label)"
+          >
             <span class="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
               {{ kpi.label }}
             </span>
             <span
-              class="text-lg font-semibold font-mono tabular-nums"
+              class="text-lg font-semibold font-mono tabular-nums animate-count-up"
               [class.text-buy]="kpi.color === 'pnl' && kpi.raw >= 0"
               [class.text-sell]="kpi.color === 'pnl' && kpi.raw < 0"
               [class.text-foreground]="kpi.color === 'neutral'"
             >
               {{ kpi.value }}
             </span>
+            <div
+              class="overflow-hidden transition-all duration-300"
+              [style.max-height]="expandedKpi() === kpi.label ? '32px' : '0px'"
+              [style.opacity]="expandedKpi() === kpi.label ? '1' : '0'"
+            >
+              <svg class="w-full" style="height:24px" viewBox="0 0 100 24" preserveAspectRatio="none">
+                <polyline
+                  fill="none"
+                  [attr.stroke]="kpi.raw >= 0 ? 'var(--buy)' : 'var(--sell)'"
+                  stroke-width="1.5"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  [attr.points]="sparklinePoints()[kpi.label]"
+                />
+              </svg>
+            </div>
           </div>
         }
       </div>
@@ -224,6 +243,38 @@ export class DashboardPanelComponent {
     });
   }
 
+  /* ── Expandable KPI state ─────────────────────────────── */
+  readonly expandedKpi = signal<string | null>(null);
+
+  toggleKpi(label: string): void {
+    this.expandedKpi.update((cur) => (cur === label ? null : label));
+  }
+
+  /** Generate random-walk sparkline points for each KPI card */
+  readonly sparklinePoints = computed(() => {
+    const map: Record<string, string> = {};
+    for (const kpi of this.kpis) {
+      const pts: number[] = [];
+      let v = 12;
+      for (let i = 0; i < 20; i++) {
+        v += (Math.sin(i * 0.7 + kpi.raw * 0.0001) * 3) + (i * 0.2 * (kpi.raw >= 0 ? 1 : -1));
+        pts.push(v);
+      }
+      const min = Math.min(...pts);
+      const max = Math.max(...pts);
+      const range = max - min || 1;
+      const points = pts
+        .map((p, i) => {
+          const x = (i / 19) * 100;
+          const y = 22 - ((p - min) / range) * 20;
+          return `${x.toFixed(1)},${y.toFixed(1)}`;
+        })
+        .join(' ');
+      map[kpi.label] = points;
+    }
+    return map;
+  });
+
   /* ── KPI Data ──────────────────────────────────────────── */
   readonly kpis: KpiCard[] = [
     { label: 'P&L Today', value: fmtPnL(93170), color: 'pnl', raw: 93170 },
@@ -313,15 +364,15 @@ export class DashboardPanelComponent {
       },
       series: [
         {
-          type: 'area',
+          type: 'areaspline',
           name: 'Today',
           data: todayValues,
           color: primaryColor,
           fillColor: {
             linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
             stops: [
-              [0, 'rgba(96, 165, 250, 0.25)'],
-              [1, 'rgba(96, 165, 250, 0.02)'],
+              [0, 'oklch(0.55 0.2 260 / 30%)'],
+              [1, 'oklch(0.55 0.2 260 / 0%)'],
             ],
           },
           lineWidth: 2,

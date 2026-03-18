@@ -214,7 +214,7 @@ function YieldCurveChart({ data }: { data: YieldCurvePoint[] }) {
           lineWidth: 2,
           fillColor: {
             linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-            stops: [[0, 'rgba(45,212,191,0.2)'], [1, 'rgba(45,212,191,0)']],
+            stops: [[0, 'oklch(0.55 0.2 260 / 30%)'], [1, 'oklch(0.55 0.2 260 / 0%)']],
           },
           marker: { enabled: false, states: { hover: { enabled: true, radius: 3, fillColor: '#60A5FA', lineWidth: 0 } } },
         },
