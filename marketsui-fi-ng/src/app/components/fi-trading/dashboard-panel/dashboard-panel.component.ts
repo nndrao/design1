@@ -37,7 +37,7 @@ interface KpiCard {
               {{ kpi.label }}
             </span>
             <span
-              class="text-lg font-semibold font-mono tabular-nums animate-count-up"
+              class="text-lg font-semibold font-mono tabular-nums"
               [class.text-buy]="kpi.color === 'pnl' && kpi.raw >= 0"
               [class.text-sell]="kpi.color === 'pnl' && kpi.raw < 0"
               [class.text-foreground]="kpi.color === 'neutral'"

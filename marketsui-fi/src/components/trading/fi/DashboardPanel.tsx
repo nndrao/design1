@@ -131,7 +131,7 @@ function KpiCard({
       </span>
       <span
         className={cn(
-          'text-xl font-mono font-semibold mt-1 animate-count-up',
+          'text-xl font-mono font-semibold mt-1',
           isPnl && isPositive && 'text-buy',
           isPnl && !isPositive && 'text-sell',
           !isPnl && 'text-foreground'
