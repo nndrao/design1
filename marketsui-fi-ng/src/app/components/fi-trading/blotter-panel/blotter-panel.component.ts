@@ -52,7 +52,7 @@ const STATUS_BADGE_CLS: Record<string, string> = {
                     class="rounded-full text-[10px] h-6 px-2"
                   >
                     {{ s }}
-                    <span class="ml-1 opacity-70">{{ statusCounts()[s] ?? 0 }}</span>
+                    <span class="ml-1 opacity-70">{{ statusCounts()[s] }}</span>
                   </button>
                 }
               </div>
@@ -200,10 +200,18 @@ export class BlotterPanelComponent {
 
   readonly statusCounts = computed(() => {
     const orders = this.allOrders();
-    const counts: Record<string, number> = {};
+    const counts: Record<StatusFilter, number> = {
+      All: orders.length,
+      Working: 0,
+      Partial: 0,
+      Filled: 0,
+      Cancelled: 0,
+    };
+
     STATUS_FILTERS.slice(1).forEach(s => {
       counts[s] = orders.filter(o => o.status === s).length;
     });
+
     return counts;
   });
 
