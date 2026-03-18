@@ -40,7 +40,7 @@
 
   /* ── Semantic: destructive ──────────────────────────────── */
   --destructive: oklch(0.62 0.24 5);          /* rose-pink — Robinhood style */
-  --destructive-foreground: oklch(0.985 0 0);
+  --destructive-foreground: oklch(0.14 0 0);  /* black text on rose bg */
 
   /* ── Chrome / borders ───────────────────────────────────── */
   --border: oklch(0.90 0.005 250);            /* subtle blue-gray border */
@@ -49,9 +49,9 @@
 
   /* ── Trading: Buy / Sell ────────────────────────────────── */
   --buy: oklch(0.60 0.17 175);               /* rich teal — vivid on white */
-  --buy-foreground: oklch(0.985 0 0);
+  --buy-foreground: oklch(0.14 0 0);          /* black text on teal bg */
   --sell: oklch(0.62 0.24 5);                /* rose-pink — Robinhood style */
-  --sell-foreground: oklch(0.985 0 0);
+  --sell-foreground: oklch(0.14 0 0);         /* black text on rose bg */
 
   /* ── Trading: P&L / Change ──────────────────────────────── */
   --positive: oklch(0.60 0.17 175);           /* teal for profit */
@@ -71,7 +71,7 @@
   --info: oklch(0.60 0.15 240);               /* sky blue */
   --info-foreground: oklch(0.985 0 0);
   --success: oklch(0.60 0.17 175);            /* teal */
-  --success-foreground: oklch(0.985 0 0);
+  --success-foreground: oklch(0.14 0 0);      /* black text on teal bg */
 
   /* ── Data viz: chart palette (colorblind-safe) ──────────── */
   --chart-1: oklch(0.55 0.2 260);             /* blue (primary) */
@@ -121,7 +121,7 @@
 
   /* ── Semantic: destructive ──────────────────────────────── */
   --destructive: oklch(0.72 0.22 5);          /* bright rose-pink for dark bg */
-  --destructive-foreground: oklch(0.985 0 0);
+  --destructive-foreground: oklch(0.14 0 0);  /* black text on rose bg */
 
   /* ── Chrome / borders ───────────────────────────────────── */
   --border: oklch(1 0 0 / 10%);               /* translucent white */
@@ -130,9 +130,9 @@
 
   /* ── Trading: Buy / Sell ────────────────────────────────── */
   --buy: oklch(0.75 0.18 175);               /* bright teal for dark bg */
-  --buy-foreground: oklch(0.14 0 0);
+  --buy-foreground: oklch(0.14 0 0);          /* black text on teal bg */
   --sell: oklch(0.72 0.22 5);                /* bright rose-pink for dark bg */
-  --sell-foreground: oklch(0.985 0 0);
+  --sell-foreground: oklch(0.14 0 0);         /* black text on rose bg */
 
   /* ── Trading: P&L / Change ──────────────────────────────── */
   --positive: oklch(0.75 0.18 175);           /* bright teal */
