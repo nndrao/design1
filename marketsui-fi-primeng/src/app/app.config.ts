@@ -44,7 +44,6 @@ export const appConfig: ApplicationConfig = {
         preset: MarketsUIPreset,
         options: {
           darkModeSelector: '.dark',
-          cssLayer: { name: 'primeng', order: 'tailwind, primeng' },
         },
       },
     }),
