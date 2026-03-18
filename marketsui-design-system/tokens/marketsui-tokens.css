@@ -26,7 +26,7 @@
   --popover-foreground: oklch(0.165 0.015 260);
 
   /* ── Brand / Accent ─────────────────────────────────────── */
-  --primary: oklch(0.55 0.2 260);             /* electric blue — neutral, no trading conflict */
+  --primary: oklch(0.60 0.24 260);             /* vivid blue — bright, high contrast on white */
   --primary-foreground: oklch(0.985 0 0);
 
   /* ── Neutral chrome ─────────────────────────────────────── */
@@ -107,7 +107,7 @@
   --popover-foreground: oklch(0.93 0.005 250);
 
   /* ── Brand / Accent ─────────────────────────────────────── */
-  --primary: oklch(0.68 0.18 260);            /* brighter blue for dark bg */
+  --primary: oklch(0.73 0.22 260);            /* vivid bright blue for dark bg */
   --primary-foreground: oklch(0.14 0.008 260);
 
   /* ── Neutral chrome ─────────────────────────────────────── */
