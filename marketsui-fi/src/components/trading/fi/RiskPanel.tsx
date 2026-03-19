@@ -1,9 +1,8 @@
 import { useMemo } from 'react'
 import Highcharts from 'highcharts'
 import { HighchartsReact } from 'highcharts-react-official'
-import type { LayoutItem } from 'react-grid-layout'
 import { useMarketData } from './MarketDataContext'
-import { PanelGrid, DragHandle } from './PanelGrid'
+import { PanelGrid, DragHandle, type LayoutItem } from './PanelGrid'
 import { cn, fmtDV01, fmtPnL, fmtBps } from '@/lib/utils'
 
 /* ── Tenor bucket boundaries (years) ────────────────────── */

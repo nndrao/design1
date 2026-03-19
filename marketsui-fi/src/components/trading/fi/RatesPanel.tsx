@@ -5,11 +5,10 @@ import { AgGridReact } from 'ag-grid-react'
 import { AllEnterpriseModule } from 'ag-grid-enterprise'
 import { marketsUITheme } from './agGridTheme'
 import { useMarketData } from './MarketDataContext'
-import { PanelGrid, DragHandle } from './PanelGrid'
+import { PanelGrid, DragHandle, type LayoutItem } from './PanelGrid'
 import { Button } from '@/components/ui/button'
 import Highcharts from 'highcharts'
 import { HighchartsReact } from 'highcharts-react-official'
-import type { LayoutItem } from 'react-grid-layout'
 
 /* ─── KRD sample data (used when no tenor is selected) ── */
 

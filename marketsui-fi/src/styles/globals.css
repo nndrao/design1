@@ -26,68 +26,6 @@
   }
 }
 
-/* ─── React Grid Layout overrides ────────────────────────── */
-.react-grid-layout {
-  position: relative;
-  transition: height 200ms ease;
-}
-
-.react-grid-item {
-  transition: all 200ms ease;
-  transition-property: left, top, width, height;
-}
-
-.react-grid-item.cssTransforms {
-  transition-property: transform, width, height;
-}
-
-.react-grid-item.resizing {
-  z-index: 1;
-  will-change: width, height;
-  opacity: 0.9;
-}
-
-.react-grid-item.react-draggable-dragging {
-  transition: none;
-  z-index: 3;
-  will-change: transform;
-  opacity: 0.9;
-  box-shadow: 0 8px 32px rgba(96, 165, 250, 0.15);
-}
-
-.react-grid-item > .react-resizable-handle {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  bottom: 0;
-  right: 0;
-  cursor: se-resize;
-}
-
-.react-grid-item > .react-resizable-handle::after {
-  content: "";
-  position: absolute;
-  right: 4px;
-  bottom: 4px;
-  width: 6px;
-  height: 6px;
-  border-right: 2px solid var(--muted-foreground);
-  border-bottom: 2px solid var(--muted-foreground);
-  opacity: 0.4;
-  transition: opacity 150ms ease;
-}
-
-.react-grid-item:hover > .react-resizable-handle::after {
-  opacity: 0.8;
-}
-
-.react-grid-placeholder {
-  background-color: var(--primary);
-  opacity: 0.1;
-  border-radius: var(--radius);
-  border: 2px dashed var(--primary);
-}
-
 /* ─── AG Grid overrides ──────────────────────────────────── */
 .ag-header-cell-text {
   text-transform: uppercase;

@@ -1,9 +1,8 @@
 import { useMemo, useRef, useState, useEffect } from 'react'
 import Highcharts from 'highcharts'
 import { HighchartsReact } from 'highcharts-react-official'
-import type { LayoutItem } from 'react-grid-layout'
 import { useMarketData } from './MarketDataContext'
-import { PanelGrid, DragHandle } from './PanelGrid'
+import { PanelGrid, DragHandle, type LayoutItem } from './PanelGrid'
 import { DASHBOARD_ORDERS, DASHBOARD_POSITIONS } from './marketData'
 import { cn, fmtYield, fmtBps, fmtPnL, fmtDV01 } from '@/lib/utils'
 
